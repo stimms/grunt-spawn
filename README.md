@@ -1,4 +1,4 @@
-grunt-spawn
+grunt-spawn [![Build Status](https://travis-ci.org/fir3pho3nixx/grunt-spawn.png?branch=master)](https://travis-ci.org/fir3pho3nixx/grunt-spawn)
 ===========
 
 A process launcher that does what it says on the tin
