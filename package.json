@@ -1,10 +1,14 @@
 {
   "name": "grunt-spawn",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "author": "fir3pho3nixx@gmail.com",
   "description": "A process launcher that does what it says on the tin",
-  "keywords": ["grunt", "spawn", "gruntplugin"],
+  "keywords": [
+    "grunt",
+    "spawn",
+    "gruntplugin"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/fir3pho3nixx/grunt-spawn.git"
