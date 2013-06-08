@@ -145,7 +145,7 @@ Here is a brief description of the elements involved:
  - `clump`: True for one spawn command, many files. False for one spawn command per file.
  - `args`: The parameters you want to supply to the cmd
  - `special args`:{0}: The parameter where the file/files should be put
- - `incl`:object: Additional filtering you might want to do for inclusions
+ - `incl`: Additional filtering you might want to do for inclusions
  - `incl/op`: This would be the function to match backed on to string.js(see npm)
  - `incl'/val`: The value that should be used for the string comparison
  - `excl`: Same as incl but just the opposite
