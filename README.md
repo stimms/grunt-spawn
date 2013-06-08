@@ -84,6 +84,7 @@ You can use the following example to setup your grunt file.
         }, 
         test: {
           cmd: "mocha", 
+          clump: false,
           args: [
             "--reporter", 
             "spec",
@@ -130,35 +131,7 @@ You can use the following example to setup your grunt file.
 
 ### The 'spawn' task
 
-Pay close attention to the spawn task above. 
-
-spawn: {
-        list: {
-          cmd: "ls", 
-          args: [
-            "-la"
-          ]
-        }, 
-        test: {
-          cmd: "mocha", 
-          args: [
-            "--reporter", 
-            "spec",
-            "{0}"
-          ],
-          incl: [{
-            op: "startsWith", 
-            val: "tests/"
-          }],
-          files: [{
-            cwd: ".", 
-            expand: true, 
-            src: ["**/*.js"]
-          }]
-        }
-      },
-
-There are two targets underneath the spawn option and these can be targeted using the following command: 
+Pay close attention to the spawn task. There are two targets namely 'spawn' which can be targeted using the following command: 
 
     grunt spawn:list
 
@@ -168,14 +141,14 @@ OR
 
 You can also add more of your own tasks. Here is a brief description of the elements involved:
 
- - 'cmd': The path to the executable you would like to spawn
- - 'clump': True for one command, many files. False for command per file.
- - 'args': The parameters you want to supply to the cmd
- - 'special args':{0}: The parameter where the file/files should be put
- - 'incl':object: Additional filtering you might want to do for inclusions
- - 'incl/op': This would be the function to match backed on to string.js(see npm)
- - 'incl'/val': The value that should be used for the string comparison
- - 'excl': Same as incl but just the opposite
- - 'files': Please see the in depth article on how to configure tasks on the gruntjs web
+ - `cmd`: The path to the executable you would like to spawn
+ - `clump`: True for one command, many files. False for command per file.
+ - `args`: The parameters you want to supply to the cmd
+ - `special args`:{0}: The parameter where the file/files should be put
+ - `incl`:object: Additional filtering you might want to do for inclusions
+ - `incl/op`: This would be the function to match backed on to string.js(see npm)
+ - `incl'/val`: The value that should be used for the string comparison
+ - `excl`: Same as incl but just the opposite
+ - `files`: Please see the in depth article on how to configure tasks on the gruntjs web
 
 Ciao! :)
