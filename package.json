@@ -1,6 +1,6 @@
 {
   "name": "grunt-spawn",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "author": "fir3pho3nixx@gmail.com",
   "description": "A process launcher that does what it says on the tin",
