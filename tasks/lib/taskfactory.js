@@ -58,14 +58,14 @@ function TaskFactory(task) {
 
 			_.each(files, function(file){
 				var args = self.format(task.data.args, file);
-				var taskArgs = new TaskArgs(task.data.command, args);
+				var taskArgs = new TaskArgs(task.data.cmd, args);
 				tasks.push(new Task(taskArgs));
 			});
 
 		} else {
 
 			var args = self.format(task.data.args, null);
-			var taskArgs = new TaskArgs(task.data.command, args);
+			var taskArgs = new TaskArgs(task.data.cmd, args);
 			tasks.push(new Task(taskArgs));
 
 		}

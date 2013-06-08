@@ -16,9 +16,19 @@ module.exports = function(grunt) {
       ]
     },
 
+
+    spawn: {
+      list: {
+        cmd: "ls", 
+        args: [
+          "-la"
+        ]
+      }
+    },
+
     release: {
       options: {
-        bump: true,
+        bump: false,
         file: "package.json",
         add: true, 
         commit: true,
@@ -31,6 +41,8 @@ module.exports = function(grunt) {
 
   });
 
+  
+  grunt.loadTasks("./tasks");
   grunt.loadNpmTasks("grunt-release");
   grunt.loadNpmTasks("grunt-contrib-jshint");
 

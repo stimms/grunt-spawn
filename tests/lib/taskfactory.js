@@ -7,7 +7,7 @@ describe("Given TaskFactory() with files", function(){
 
 	var task = {
 		data: {
-			command: "command", 
+			cmd: "command", 
 			args: ["arg1", "arg2", "{0}}"]
 		},
 		files: [{

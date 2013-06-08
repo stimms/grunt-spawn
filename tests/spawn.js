@@ -5,11 +5,11 @@ describe("Given Spawn()", function(){
 	grunt.initConfig({
 		spawn: {
 			list: {
-				command: "ls",
+				cmd: "ls",
 				args: ["-la"]
 			}, 
 			print: {
-				command: "cat", 
+				cmd: "cat", 
 				args: ["{0}"], 
 				files: {
 					src: ["./../**/*.js"],
