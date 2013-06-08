@@ -1,16 +1,25 @@
-_ = require("lodash");
 require("string-format");
+
+S = require("string");
+_ = require("lodash");
+util = require("util");
 grunt = require("grunt");
 
 Task = require("./task");
 TaskArgs = require("./taskargs");
+TaskFilter = require("./taskfilter");
 
 function TaskFactory(task) {
 	
 	var self = this;
+	self.filter = new TaskFilter(task);
+
+	grunt.log.debug("spawn::lib::TaskFactory::#ctor() ->");
 
 	self.format = function(args, filepath) {
 		
+		grunt.log.debug("spawn::lib::TaskFactory::#format() ->");
+
 		formattedArgs = [];
 		
 		_.each(args, function(arg) {
@@ -24,11 +33,16 @@ function TaskFactory(task) {
 
 		});
 
+		grunt.log.debug("spawn::lib::TaskFactory::#format() <-");
+
 		return formattedArgs;
 	};
 
 	self.hasFiles = function(){
 		
+		grunt.log.debug("spawn::lib::TaskFactory::#hasFiles() ->");
+		grunt.log.debug("spawn::lib::TaskFactory::#hasFiles() <-");
+
 		return !_.isNull(task) 
 			&& _.has(task, "files") 
 			&& _.has(task.files, "length") 
@@ -38,21 +52,34 @@ function TaskFactory(task) {
 
 	self.buildFiles = function(){
 		
+		grunt.log.debug("spawn::lib::TaskFactory::#buildFiles() ->");
+
 		var files = [];
 
 		if (self.hasFiles()) {
+
+			grunt.log.debug("spawn::lib::TaskFactory::#buildFiles() -> hasFiles = true");
+			
 			_.each(task.files, function(file){
 				files.push(file.src[0]);
 			});
+
+		} else {
+			grunt.log.debug("spawn::lib::TaskFactory::#buildFiles() -> hasFiles = false");
 		}
+
+		grunt.log.debug("spawn::lib::TaskFactory::#buildFiles() <-");
 
 		return files;
 	};
 
 	self.buildTasks = function(){
 		
+		grunt.log.debug("spawn::lib::TaskFactory::#buildTasks() ->");
+
 		var tasks = [];
 		var files = self.buildFiles();
+		files = self.filter.zap(files);
 		
 		if (_.any(files)) {
 
@@ -69,6 +96,8 @@ function TaskFactory(task) {
 			tasks.push(new Task(taskArgs));
 
 		}
+
+		grunt.log.debug("spawn::lib::TaskFactory::#buildTasks() <-");
 
 		return tasks;
 	};

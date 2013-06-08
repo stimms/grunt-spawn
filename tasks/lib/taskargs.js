@@ -1,8 +1,8 @@
-function TaskArgs(command, args){
+function TaskArgs(cmd, args){
 	
 	var self = this;
 	self.args = args;
-	self.command = command;
+	self.cmd = cmd;
 	
 }
 

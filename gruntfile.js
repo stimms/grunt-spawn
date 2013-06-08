@@ -31,10 +31,18 @@ module.exports = function(grunt) {
           "spec",
           "{0}"
         ],
+        incl: [{
+          op: "startsWith", 
+          val: "tests/"
+        }],
+        excl: [{
+          op: "contains",
+          val: "node_modules"
+        }],
         files: [{
           cwd: ".", 
           expand: true, 
-          src: ["test/**/*.js"]
+          src: ["**/*.js"]
         }]
       }
     },
