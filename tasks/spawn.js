@@ -7,8 +7,6 @@ spawn = require("./lib");
 
 grunt.registerMultiTask("spawn", function(){
 	
-	var self = this;
-
 	var done = this.async();
 	var factory = new spawn.TaskFactory(this);
 	var tasks = factory.buildTasks();
@@ -18,14 +16,12 @@ grunt.registerMultiTask("spawn", function(){
 	_.each(tasks, function(task){
 		actions.push(function(callback){
 			task.execute(function(){
-				grunt.log.ok("Completed");
 				callback(null, counter++);
 			});
 		});
 	});
 
 	async.series(actions, function(){
-		grunt.log.ok("Completed");
 		done();
 	});
 
