@@ -35,10 +35,6 @@ module.exports = function(grunt) {
           op: "startsWith", 
           val: "tests/"
         }],
-        excl: [{
-          op: "contains",
-          val: "node_modules"
-        }],
         files: [{
           cwd: ".", 
           expand: true, 
@@ -49,7 +45,7 @@ module.exports = function(grunt) {
 
     release: {
       options: {
-        bump: false,
+        bump: true,
         file: "package.json",
         add: true, 
         commit: true,
