@@ -1,6 +1,7 @@
 require("string-format");
 
-_ = require("lodash")
+S = require("string");
+_ = require("lodash");
 util = require("util");
 grunt = require("grunt");
 
@@ -21,11 +22,15 @@ function Task(taskArgs){
 				stdio: "inherit"
 			}
 		};
+		
+		var formattedCmd = taskArgs.cmd;
+		var formattedArgs = S(_(taskArgs.args).toString()).replaceAll(",", " ");
+		var spawnCommand = "{0} {1}".format(formattedCmd, formattedArgs);
 
-		grunt.log.subhead("Spawn: Launching child process");
-		grunt.log.ok("Spawn: Launching '{0} {1}'".format(taskArgs.cmd, _(taskArgs.args).toString()));
+		grunt.log.subhead("\nSpawn: Launching child process");
+		grunt.log.ok("Spawn: Launching '{0}'".format(spawnCommand));
 
-		var spawn = grunt.util.spawn(options);
+		var spawn = grunt.util.spawn(options, function(){});
 		spawn.stdin.pipe(process.stdin);
 		spawn.stdout.pipe(process.stdout);
 		spawn.stderr.pipe(process.stderr);
@@ -36,7 +41,7 @@ function Task(taskArgs){
 
 		spawn.on("exit", function(code){
 			
-			if (!_.isNull(done))
+			if (done != null)
 				done(code);
 			
 			if (code !== 0)

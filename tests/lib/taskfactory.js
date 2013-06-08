@@ -79,9 +79,9 @@ describe("Given TaskFactory() with files", function(){
 
 		it("Then should have task[1..n].command == 'command'", function(){
 
-			tasks[0].command.should.equal("command");
-			tasks[1].command.should.equal("command");
-			tasks[2].command.should.equal("command");
+			tasks[0].cmd.should.equal("command");
+			tasks[1].cmd.should.equal("command");
+			tasks[2].cmd.should.equal("command");
 
 		});
 

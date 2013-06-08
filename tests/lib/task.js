@@ -13,9 +13,7 @@ describe("Given Task('ls', ['-la'])", function(){
 
 		it("Then should not throw", function(){
 
-			(function(){
-				task.execute();
-			}).should.not.throw();
+			task.execute();
 
 		});
 
@@ -25,7 +23,7 @@ describe("Given Task('ls', ['-la'])", function(){
 
 		it("Then should not throw", function(done){
 
-			task.execute(function(error, result, code){
+			task.execute(function(code){
 				code.should.equal(0);
 				done();
 			});

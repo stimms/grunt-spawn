@@ -20,7 +20,7 @@ describe("Given Spawn()", function(){
 		}
 	});
 
-	grunt.loadTasks("./../tasks");
+	grunt.loadTasks("tasks/");
 
 	describe("When #list()", function(){
 
