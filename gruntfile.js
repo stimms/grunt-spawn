@@ -23,6 +23,19 @@ module.exports = function(grunt) {
         args: [
           "-la"
         ]
+      }, 
+      test: {
+        cmd: "mocha", 
+        args: [
+          "--reporter", 
+          "spec",
+          "{0}"
+        ],
+        files: [{
+          cwd: ".", 
+          expand: true, 
+          src: ["test/**/*.js"]
+        }]
       }
     },
 
