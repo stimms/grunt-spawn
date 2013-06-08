@@ -1,28 +1,32 @@
-_ = require("lodash");
 require("string-format");
-grunt = require("grunt");
 
+_ = require("lodash");
+async = require("async");
+grunt = require("grunt");
 spawn = require("./lib");
 
 grunt.registerMultiTask("spawn", function(){
 	
 	var self = this;
-	self.done = this.async();
 
+	var done = this.async();
 	var factory = new spawn.TaskFactory(this);
 	var tasks = factory.buildTasks();
 
 	var counter = 0;
-
+	var actions = [];
 	_.each(tasks, function(task){
-		
-		task.execute(function(){
-			counter++;
-			if (counter == tasks.length) {
-				self.done();
-			}
+		actions.push(function(callback){
+			task.execute(function(){
+				grunt.log.ok("Completed");
+				callback(null, counter++);
+			});
 		});
+	});
 
+	async.series(actions, function(){
+		grunt.log.ok("Completed");
+		done();
 	});
 
 });

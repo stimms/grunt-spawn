@@ -14,6 +14,7 @@
     "url": "https://github.com/fir3pho3nixx/grunt-spawn.git"
   },
   "dependencies": {
+    "async": "0.2.x",
     "lodash": "1.2.x",
     "string": "1.4.x",
     "string-format": "0.2.x"

@@ -67,5 +67,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-release");
   grunt.loadNpmTasks("grunt-contrib-jshint");
 
-  grunt.registerTask("default", ["release"]);
+  grunt.registerTask("default", ["spawn:test", "release"]);
+  
 };
