@@ -142,7 +142,7 @@ OR
 You can also add more of your own tasks. Here is a brief description of the elements involved:
 
  - `cmd`: The path to the executable you would like to spawn
- - `clump`: True for one command, many files. False for command per file.
+ - `clump`: True for one command, many files. False for one command per file.
  - `args`: The parameters you want to supply to the cmd
  - `special args`:{0}: The parameter where the file/files should be put
  - `incl`:object: Additional filtering you might want to do for inclusions
