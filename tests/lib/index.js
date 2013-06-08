@@ -1,14 +1,14 @@
 should = require("should");
 assert = require("assert");
 
-describe("Given spawn.*", function(){
+describe("Given spawn.*", function() {
 
 	var spawn = require("../../tasks/lib");
 	assert(spawn != null);
 
-	describe("When spawn.Task()", function(){
+	describe("When spawn.Task()", function() {
 
-		it("Then should exist", function(){
+		it("Then should exist", function() {
 
 			assert(spawn.Task != null);
 
@@ -16,9 +16,9 @@ describe("Given spawn.*", function(){
 
 	});
 
-	describe("When spawn.TaskArgs()", function(){
+	describe("When spawn.TaskArgs()", function() {
 
-		it("Then should exist", function(){
+		it("Then should exist", function() {
 
 			assert(spawn.TaskArgs != null);
 
@@ -26,9 +26,9 @@ describe("Given spawn.*", function(){
 
 	});
 
-	describe("When spawn.TaskFactory()", function(){
+	describe("When spawn.TaskFactory()", function() {
 
-		it("Then should exist", function(){
+		it("Then should exist", function() {
 
 			assert(spawn.TaskFactory != null);
 

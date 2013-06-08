@@ -2,42 +2,30 @@ path = require("path");
 
 module.exports = function(grunt) {
   //grunt.option("force", true);
-  
   grunt.initConfig({
-    
+
     pkg: grunt.file.readJSON("package.json"),
 
     jshint: {
-      files: [
-        "package.json",
-        "gruntfile.js", 
-        "lib/**/*.js",
-        "test/**/*.js"
-      ]
+      files: ["package.json", "gruntfile.js", "lib/**/*.js", "test/**/*.js"]
     },
 
 
     spawn: {
       list: {
-        cmd: "ls", 
-        args: [
-          "-la"
-        ]
-      }, 
+        cmd: "ls",
+        args: ["-la"]
+      },
       test: {
-        cmd: "mocha", 
-        args: [
-          "--reporter", 
-          "spec",
-          "{0}"
-        ],
+        cmd: "mocha",
+        args: ["--reporter", "spec", "{0}"],
         incl: [{
-          op: "startsWith", 
+          op: "startsWith",
           val: "tests/"
         }],
         files: [{
-          cwd: ".", 
-          expand: true, 
+          cwd: ".",
+          expand: true,
           src: ["**/*.js"]
         }]
       }
@@ -47,7 +35,7 @@ module.exports = function(grunt) {
       options: {
         bump: true,
         file: "package.json",
-        add: true, 
+        add: true,
         commit: true,
         tag: true,
         push: true,
@@ -58,12 +46,12 @@ module.exports = function(grunt) {
 
   });
 
-  
+
   grunt.loadTasks("./tasks");
   grunt.loadNpmTasks("grunt-release");
   grunt.loadNpmTasks("grunt-contrib-jshint");
 
   grunt.registerTask("test", ["spawn:test"]);
   grunt.registerTask("default", ["spawn:test", "release"]);
-  
+
 };

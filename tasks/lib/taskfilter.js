@@ -12,7 +12,7 @@ function TaskFilter(task) {
 	self.include = function(files, incl) {
 
 		var result = [];
-		
+
 		grunt.log.debug("spawn::lib::TaskFilter::#include() ->");
 
 		_.each(incl, function(i) {
@@ -52,7 +52,7 @@ function TaskFilter(task) {
 		return result;
 	}
 
-	self.zap = function(files){
+	self.zap = function(files) {
 
 		grunt.log.debug("spawn::lib::TaskFilter::#zap() ->");
 

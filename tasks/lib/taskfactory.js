@@ -10,25 +10,24 @@ TaskArgs = require("./taskargs");
 TaskFilter = require("./taskfilter");
 
 function TaskFactory(task) {
-	
+
 	var self = this;
 	self.filter = new TaskFilter(task);
 
 	grunt.log.debug("spawn::lib::TaskFactory::#ctor() ->");
 
 	self.format = function(args, filepath) {
-		
+
 		grunt.log.debug("spawn::lib::TaskFactory::#format() ->");
 
 		formattedArgs = [];
-		
+
 		_.each(args, function(arg) {
 
 			if (!_.isNull(filepath)) {
 				formattedArgs.push(arg.format(filepath));
 			} else {
-				if (arg != "{0}")
-					formattedArgs.push(arg);
+				if (arg != "{0}") formattedArgs.push(arg);
 			}
 
 		});
@@ -38,20 +37,17 @@ function TaskFactory(task) {
 		return formattedArgs;
 	};
 
-	self.hasFiles = function(){
-		
+	self.hasFiles = function() {
+
 		grunt.log.debug("spawn::lib::TaskFactory::#hasFiles() ->");
 		grunt.log.debug("spawn::lib::TaskFactory::#hasFiles() <-");
 
-		return !_.isNull(task) 
-			&& _.has(task, "files") 
-			&& _.has(task.files, "length") 
-			&& task.files.length > 0;
+		return !_.isNull(task) && _.has(task, "files") && _.has(task.files, "length") && task.files.length > 0;
 
 	};
 
-	self.buildFiles = function(){
-		
+	self.buildFiles = function() {
+
 		grunt.log.debug("spawn::lib::TaskFactory::#buildFiles() ->");
 
 		var files = [];
@@ -59,8 +55,8 @@ function TaskFactory(task) {
 		if (self.hasFiles()) {
 
 			grunt.log.debug("spawn::lib::TaskFactory::#buildFiles() -> hasFiles = true");
-			
-			_.each(task.files, function(file){
+
+			_.each(task.files, function(file) {
 				files.push(file.src[0]);
 			});
 
@@ -73,17 +69,17 @@ function TaskFactory(task) {
 		return files;
 	};
 
-	self.buildTasks = function(){
-		
+	self.buildTasks = function() {
+
 		grunt.log.debug("spawn::lib::TaskFactory::#buildTasks() ->");
 
 		var tasks = [];
 		var files = self.buildFiles();
 		files = self.filter.zap(files);
-		
+
 		if (_.any(files)) {
 
-			_.each(files, function(file){
+			_.each(files, function(file) {
 				var args = self.format(task.data.args, file);
 				var taskArgs = new TaskArgs(task.data.cmd, args);
 				tasks.push(new Task(taskArgs));

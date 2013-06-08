@@ -5,7 +5,7 @@ _ = require("lodash");
 util = require("util");
 grunt = require("grunt");
 
-function Task(taskArgs){
+function Task(taskArgs) {
 
 	var self = this;
 	self.cmd = taskArgs.cmd;
@@ -22,7 +22,7 @@ function Task(taskArgs){
 				stdio: "inherit"
 			}
 		};
-		
+
 		var formattedCmd = taskArgs.cmd;
 		var formattedArgs = S(_(taskArgs.args).toString()).replaceAll(",", " ");
 		var spawnCommand = "{0} {1}".format(formattedCmd, formattedArgs);
@@ -30,22 +30,20 @@ function Task(taskArgs){
 		grunt.log.subhead("\nSpawn: Launching child process");
 		grunt.log.ok("Spawn: Launching '{0}'".format(spawnCommand));
 
-		var spawn = grunt.util.spawn(options, function(){});
+		var spawn = grunt.util.spawn(options, function() {});
 		spawn.stdin.pipe(process.stdin);
 		spawn.stdout.pipe(process.stdout);
 		spawn.stderr.pipe(process.stderr);
 
-		spawn.on("error", function(){
+		spawn.on("error", function() {
 			grunt.fail.fatal("Spawn: A child process generated error. Exiting.", 1);
 		})
 
-		spawn.on("exit", function(code){
-			
-			if (done != null)
-				done(code);
-			
-			if (code !== 0)
-				grunt.fail.fatal("Spawn: A child process generated error. Exiting.", 1);
+		spawn.on("exit", function(code) {
+
+			if (done != null) done(code);
+
+			if (code !== 0) grunt.fail.fatal("Spawn: A child process generated error. Exiting.", 1);
 		})
 
 		grunt.log.debug("spawn::lib::Task::#execute() <-");
