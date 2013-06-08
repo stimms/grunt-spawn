@@ -18,6 +18,7 @@ module.exports = function(grunt) {
       },
       test: {
         cmd: "mocha",
+        clump: false,
         args: ["--reporter", "spec", "{0}"],
         incl: [{
           op: "startsWith",

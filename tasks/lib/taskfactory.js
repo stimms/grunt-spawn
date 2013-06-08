@@ -79,11 +79,24 @@ function TaskFactory(task) {
 
 		if (_.any(files)) {
 
-			_.each(files, function(file) {
-				var args = self.format(task.data.args, file);
+			grunt.log.debug("spawn::lib::TaskFactory::#buildTasks() -> clump? = " + task.data.clump);
+
+			if (!_.isNull(task.data.clump) && task.data.clump) {
+				
+				var clumpedFiles = files.join(" ");
+				var args = self.format(task.data.args, clumpedFiles);
 				var taskArgs = new TaskArgs(task.data.cmd, args);
 				tasks.push(new Task(taskArgs));
-			});
+
+			} else {
+				
+				_.each(files, function(file) {
+					var args = self.format(task.data.args, file);
+					var taskArgs = new TaskArgs(task.data.cmd, args);
+					tasks.push(new Task(taskArgs));
+				});
+
+			}
 
 		} else {
 
