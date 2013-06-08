@@ -34,14 +34,14 @@ module.exports = function(grunt) {
 
     release: {
       options: {
-        bump: false,
+        bump: true,
         file: "package.json",
         add: true,
         commit: true,
         tag: true,
         push: true,
         pushTags: true,
-        npm: false
+        npm: true
       }
     }
 
