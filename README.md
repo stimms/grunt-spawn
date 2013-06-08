@@ -5,7 +5,7 @@ A process launcher that does what it says on the tin
 
 ## What is this?
 
-This project is a plugin for Grunt.JS that gives one the ability to spawn processes. 
+This project is a plugin for Grunt.JS that gives one the ability to spawn processes. This project has not been tested on windows but I am sure with all the heavy lifting the grunt team have done to make Grunt work everywhere, it might just work. The tests are not supported for windows.
 
 ## How do I use it?
 
@@ -19,7 +19,7 @@ You can install this plugin via the node package manager.
 
 ### package.json
 
-It is also good to create yourself a package.json file and emebed it in the dependencies or devDependencies section depending on how you plan to use it. For more please click [here](https://npmjs.org/doc/json.html). An example is listed below: 
+It is also good to create yourself a package.json file and emebed it in the dependencies or devDependencies section. For more please click [here](https://npmjs.org/doc/json.html). Example below: 
 
     {
       "name": "my-project",
@@ -131,7 +131,7 @@ You can use the following example to setup your grunt file.
 
 ### The 'spawn' task
 
-Pay close attention to the spawn task. There are two targets namely 'spawn' which can be targeted using the following command: 
+Pay special attention to the spawn task above. There are two targets namely `list` which is merely a demonstration of a bare bones shell command and `test` which demonstrates how this plugin can be tweaked to do slightly more fine grained spawning. Grunt-cli commands below: 
 
     grunt spawn:list
 
@@ -139,16 +139,18 @@ OR
 
     grunt spawn:test
 
-You can also add more of your own tasks. Here is a brief description of the elements involved:
+Here is a brief description of the elements involved:
 
  - `cmd`: The path to the executable you would like to spawn
- - `clump`: True for one command, many files. False for one command per file.
+ - `clump`: True for one spawn command, many files. False for one spawn command per file.
  - `args`: The parameters you want to supply to the cmd
  - `special args`:{0}: The parameter where the file/files should be put
  - `incl`:object: Additional filtering you might want to do for inclusions
  - `incl/op`: This would be the function to match backed on to string.js(see npm)
  - `incl'/val`: The value that should be used for the string comparison
  - `excl`: Same as incl but just the opposite
+ - `excl/op`: Same as incl but just the opposite
+ - `excl'/val`: Same as incl but just the opposite
  - `files`: Please see the in depth article on how to configure tasks on the gruntjs web
 
 Ciao! :)
