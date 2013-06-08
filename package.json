@@ -26,7 +26,9 @@
     "grunt-release": "0.3.x",
     "grunt-contrib-jshint": "0.6.0"
   },
-  "scripts": {},
+  "scripts": {
+    "test": "grunt test"
+  },
   "engines": {
     "node": "0.10.x"
   }
