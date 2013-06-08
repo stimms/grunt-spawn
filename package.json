@@ -1,0 +1,31 @@
+{
+  "name": "grunt-spawn",
+  "version": "0.0.1",
+  "private": false,
+  "author": "fir3pho3nixx@gmail.com",
+  "description": "A process launcher that does what it says on the tin",
+  "keywords": [
+    "grunt",
+    "spawn", 
+    "gruntplugin"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fir3pho3nixx/grunt-spawn.git"
+  },
+  "dependencies": {
+    "lodash": "1.2.x",
+    "string-format": "0.2.x"
+  },
+  "devDependencies": {
+    "mocha": "1.10.x",
+    "should": "1.2.x",
+    "grunt": "0.4.x",
+    "grunt-release": "0.3.x",
+    "grunt-contrib-jshint": "0.6.0"
+  },
+  "scripts": {},
+  "engines": {
+    "node": "0.10.x"
+  }
+}
