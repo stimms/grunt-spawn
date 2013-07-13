@@ -19,10 +19,10 @@
     "url": "https://github.com/fir3pho3nixx/grunt-spawn.git"
   },
   "dependencies": {
-    "async": "0.2.x",
-    "lodash": "1.2.x",
-    "string": "1.4.x",
-    "string-format": "0.2.x"
+    "async": "0.x.x",
+    "lodash": "1.x.x",
+    "string": "1.x.x",
+    "string-format": "0.x.x"
   },
   "devDependencies": {
     "mocha": "1.10.x",
