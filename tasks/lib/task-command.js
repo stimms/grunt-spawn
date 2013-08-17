@@ -1,11 +1,6 @@
-require("string-format");
+require("./include");
 
-S = require("string");
-_ = require("lodash");
-util = require("util");
-grunt = require("grunt");
-
-function Task(taskArgs) {
+function TaskCommand(taskArgs) {
 
 	var self = this;
 	self.cmd = taskArgs.cmd;

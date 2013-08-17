@@ -1,5 +1,6 @@
 module.exports = {
-	Task: require("./task"),
-	TaskArgs: require("./taskargs"),
-	TaskFactory: require("./taskfactory")
+	TaskArgs: require("./task-args"),
+	TaskFactory: require("./task-filter"),
+	TaskCommand: require("./task-command"),
+	TaskFactory: require("./task-factory"), 
 };

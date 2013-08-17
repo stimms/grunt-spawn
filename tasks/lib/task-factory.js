@@ -1,18 +1,11 @@
-require("string-format");
+require("./include");
 
-S = require("string");
-_ = require("lodash");
-util = require("util");
-grunt = require("grunt");
+var TaskFilter = require("./task-filter");
 
-Task = require("./task");
-TaskArgs = require("./taskargs");
-TaskFilter = require("./taskfilter");
-
-function TaskFactory(task) {
+function TaskFactory(gruntTask) {
 
 	var self = this;
-	self.filter = new TaskFilter(task);
+	self.filter = new TaskFilter(gruntTask);
 
 	grunt.log.debug("spawn::lib::TaskFactory::#ctor() ->");
 
@@ -69,7 +62,7 @@ function TaskFactory(task) {
 		return files;
 	};
 
-	self.buildTasks = function() {
+	self.buildTaskCommands = function() {
 
 		grunt.log.debug("spawn::lib::TaskFactory::#buildTasks() ->");
 
