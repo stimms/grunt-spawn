@@ -6,19 +6,7 @@ function TaskCommand(taskArgs) {
 	self.cmd = taskArgs.cmd;
 	self.args = taskArgs.args;
 
-	self.formatCmd = function(){
-		var stringArgs = _(taskArgs.args).toString();
-		var formattedArgs = S(stringArgs).replaceAll(",", " ");
-		return "{0} {1}".format(taskArgs.cmd, formattedArgs);
-	};
-
-	self.printCmd = function(){
-		var cmd = self.formatCmd();
-		grunt.log.subhead("\nSpawn: Launching child process");
-		grunt.log.ok("Spawn: Launching '{0}'".format(cmd));
-	};
-
-	self.createOpts = function(){
+	self.createOptions = function(){
 		return {
 			cmd: taskArgs.cmd,
 			args: taskArgs.args,
@@ -28,7 +16,7 @@ function TaskCommand(taskArgs) {
 		};
 	};
 
-	self.redirectIO = function(spawn){
+	self.redirectOutput = function(spawn){
 		spawn.stdin.pipe(process.stdin);
 		spawn.stdout.pipe(process.stdout);
 		spawn.stderr.pipe(process.stderr);
@@ -37,11 +25,11 @@ function TaskCommand(taskArgs) {
 	self.execute = function(done) {
 		grunt.log.debug("spawn::lib::Task::#execute() ->");
 
-		self.printCmd();
+		self.printCommand();
 
-		var opts = self.createOpts();
+		var opts = self.createOptions();
 		var spawn = grunt.util.spawn(opts, function() {});
-		self.redirectIO(spawn);
+		self.redirectOutput(spawn);
 
 		spawn.on("error", function() {
 			grunt.fail.fatal("Spawn: A child process generated error. Exiting.", 1);
