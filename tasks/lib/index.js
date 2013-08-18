@@ -1,4 +1,5 @@
 module.exports = {
+	GruntTask: require("./grunt-task")
 	TaskArgs: require("./task-args"),
 	TaskCommand: require("./task-command"),
 	TaskEvents: require("./task-events"),

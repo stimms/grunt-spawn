@@ -1,52 +1,18 @@
 require("./include");
 
+var GruntTask = require("./grunt-task");
 var TaskFilter = require("./task-filter");
 
 function TaskFactory(gruntTask) {
 
 	var self = this;
+	self.task = new GruntTask(gruntTask);
 	self.filter = new TaskFilter(gruntTask);
-
-	self.format = function(args, filepath) {
-
-		formattedArgs = [];
-
-		_.each(args, function(arg) {
-
-			if (!_.isNull(filepath)) {
-				formattedArgs.push(arg.format(filepath));
-			} else {
-				if (arg != "{0}") formattedArgs.push(arg);
-			}
-
-		});
-
-		return formattedArgs;
-	};
-
-	self.hasFiles = function() {
-
-		return !_.isNull(task) && _.has(task, "files") && _.has(task.files, "length") && task.files.length > 0;
-
-	};
-
-	self.buildFiles = function() {
-
-		var files = [];
-
-		if (self.hasFiles()) {
-			_.each(task.files, function(file) {
-				files.push(file.src[0]);
-			});
-		}
-
-		return files;
-	};
 
 	self.buildTaskCommands = function() {
 
 		var tasks = [];
-		var files = self.buildFiles();
+		var files = self.task.buildFiles();
 		files = self.filter.zap(files);
 
 		if (_.any(files)) {
