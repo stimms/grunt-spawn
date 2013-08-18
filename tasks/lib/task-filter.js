@@ -8,7 +8,6 @@ function TaskFilter(task) {
 
 		var result = [];
 
-
 		_.each(incl, function(i) {
 			_.each(files, function(file) {
 				var shouldInclude = S(file)[i.op](i.val);

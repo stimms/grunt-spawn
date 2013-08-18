@@ -1,9 +1,9 @@
 module.exports = {
 	TaskArgs: require("./task-args"),
-	TaskFactory: require("./task-command"),
-	TaskFactory: require("./task-events"),
+	TaskCommand: require("./task-command"),
+	TaskEvents: require("./task-events"),
 	TaskFactory: require("./task-factory"),
-	TaskFactory: require("./task-filter"),
-	TaskFactory: require("./task-printer"),
-	TaskFactory: require("./task-stream")
+	TaskFilter: require("./task-filter"),
+	TaskPrinter: require("./task-printer"),
+	TaskStream: require("./task-stream")
 };

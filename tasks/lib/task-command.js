@@ -17,13 +17,9 @@ function TaskCommand(taskArgs, taskEvents, taskPrinter, taskStream) {
 	};
 
 	self.execute = function(done) {
-		grunt.log.debug("spawn::lib::Task::#execute() ->");
-
 		var opts = self.createOptions();
 		var spawn = grunt.util.spawn(opts, function() {});
 		self.redirectOutput(spawn);
-
-		grunt.log.debug("spawn::lib::Task::#execute() <-");
 	};
 }
 
