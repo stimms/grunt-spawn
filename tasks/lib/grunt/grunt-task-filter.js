@@ -1,11 +1,10 @@
 require("./include");
 
-function TaskFilter(task) {
+function GruntTaskFilter(task) {
 
 	var self = this;
 
 	self.include = function(files, incl) {
-
 		var result = [];
 
 		_.each(incl, function(i) {
@@ -21,7 +20,6 @@ function TaskFilter(task) {
 	};
 
 	self.exclude = function(files, excl) {
-
 		var result = [];
 
 		_.each(excl, function(e) {
@@ -38,7 +36,6 @@ function TaskFilter(task) {
 	}
 
 	self.zap = function(files) {
-
 		if (_.has(task.data, "incl")) {
 			files = self.include(files, task.data.incl);
 		}

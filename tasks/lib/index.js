@@ -1,10 +1,9 @@
 module.exports = {
-	GruntTask: require("./grunt-task")
+	grunt: require("./grunt/"),
 	TaskArgs: require("./task-args"),
 	TaskCommand: require("./task-command"),
 	TaskEvents: require("./task-events"),
 	TaskFactory: require("./task-factory"),
-	TaskFilter: require("./task-filter"),
 	TaskPrinter: require("./task-printer"),
 	TaskStream: require("./task-stream")
 };

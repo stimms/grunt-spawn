@@ -7,17 +7,15 @@ function TaskFactory(gruntTask) {
 
 	var self = this;
 	self.task = new GruntTask(gruntTask);
-	self.filter = new TaskFilter(gruntTask);
 
 	self.buildTaskCommands = function() {
 
 		var tasks = [];
 		var files = self.task.buildFiles();
-		files = self.filter.zap(files);
 
 		if (_.any(files)) {
 
-			if (!_.isNull(task.data.clump) && task.data.clump) {
+			if (self.task.isClumpy()) {
 				
 				var clumpedFiles = files.join(" ");
 				var args = self.format(task.data.args, clumpedFiles);
