@@ -1,7 +1,5 @@
-require("string-format");
+require("./lib/include");
 
-_ = require("lodash");
-async = require("async");
 grunt = require("grunt");
 spawn = require("./lib");
 
