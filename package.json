@@ -22,6 +22,7 @@
     "async": "0.x.x",
     "lodash": "1.x.x",
     "string": "1.x.x",
+    "fs-tools": "0.2.x",
     "string-format": "0.x.x"
   },
   "devDependencies": {
