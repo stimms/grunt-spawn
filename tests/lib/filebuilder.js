@@ -11,7 +11,7 @@ describe("Given FileBuilder()", function(){
 		fileBuilder = new FileBuilder();
 	});
 
-	describe("When #constructor", function(){
+	describe("When #constructor()", function(){
 
 		it("Then the rootDirectory should be set", function(){
 
@@ -23,7 +23,7 @@ describe("Given FileBuilder()", function(){
 
 	});
 
-	describe("When #setDirectory", function(){
+	describe("When #setDirectory()", function(){
 
 		it("Then should change the rootFolder", function(){
 
@@ -34,7 +34,7 @@ describe("Given FileBuilder()", function(){
 
 	});
 
-	describe("When #eachDirectory", function(){
+	describe("When #eachDirectory()", function(){
 
 		it("Then we should find at least one directory", function(){
 
@@ -67,7 +67,7 @@ describe("Given FileBuilder()", function(){
 
 	});
 
-	describe("When #eachFile", function(){
+	describe("When #eachFile()", function(){
 
 		it("Then should find 'package.json'", function(){
 
@@ -84,6 +84,52 @@ describe("Given FileBuilder()", function(){
 
 
 		});
+
+	});
+
+	describe("When #allDirectories()", function(){
+
+		var directories = fileBuilder.allDirectories();
+
+		it("Then should find more than one directory", function(){
+			assert(directories.length > 0, "Could not find any directories");
+		});
+
+		it ("Then should find directory 'tasks'", function(){
+			var result = _(directories).first(function(directory){
+				return S(directory).contains("/tasks/");
+			});
+
+			assert(!_.isNull(result) && !_.isEmpty(result), "Could not find directory 'tasks'");
+		});
+
+	});
+
+	describe("When #allFiles()", function(){
+
+		var files = fileBuilder.allFiles();
+
+		it("Then should find more than one files", function(){
+			assert(files.length > 0, "Could not find any files");
+		});
+
+		it ("Then should find file 'package.json'", function(){
+			var result = _(files).first(function(file){
+				return S(files).contains("package.json");
+			});
+
+			assert(!_.isNull(result) && !_.isEmpty(result), "Could not find file 'package.json'");
+		});
+
+	});
+
+	describe("When #all()", function(){
+
+		var all = fileBuilder.all();
+
+		it("Then should find more than one item", function(){
+			assert(all.length > 0, "Could not find any directory or file items in result");
+		})
 
 	});
 

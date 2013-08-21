@@ -34,6 +34,18 @@ function FileBuilder() {
 
 	};
 
+	self.allDirectories = function(){
+
+		var results = [];
+
+		self.eachDirectory(function(directory){
+			results.push(directory);
+		});
+
+		return results;
+
+	};
+
 	self.eachFile = function(fileCallback) {
 
 		assert(fileCallback, "fileCallback == null");
@@ -45,6 +57,27 @@ function FileBuilder() {
 				var filePath = path.normalize(fileSystemItem);
 				fileCallback(filePath);
 			});
+
+	};
+
+	self.allFiles = function(){
+
+		var results = [];
+
+		self.eachFile(function(file){
+			results.push(file);
+		});
+
+		return results;
+
+	};
+
+	self.all = function(){
+
+		var results = [];
+		results = results.concat(self.allDirectories());
+		results = results.concat(self.allFiles());
+		return results;
 
 	};
 
