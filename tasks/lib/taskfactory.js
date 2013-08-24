@@ -5,7 +5,7 @@ TaskArgs = require("./taskargs");
 TaskConfig = require("./taskconfig");
 TaskFilter = require("./taskfilter");
 FileBuilder = require("./filebuilder");
-Wildcard = require("./Wildcard");
+Wildcard = require("./wildcard");
 
 function TaskFactory(task) {
 
