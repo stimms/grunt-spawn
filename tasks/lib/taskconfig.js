@@ -10,12 +10,12 @@ function TaskConfig(task) {
 	self.taskHasData = self._task.has("data");
 
 	self.propertyDefinitions = {
-		command: { required: true, type: "path" },
-		arguments: { required: false, type: "array" },
-		pattern: { required: true, type: "string" },
-		directory: { required: false, type: "path" },
-		groupFiles: { required: false, type: "bool" },
-		fileSeparator: { require: false, type: "char" }
+		command: { required: true, type: "path", default: "ls" },
+		arguments: { required: false, type: "array", default: "{0}" },
+		pattern: { required: true, type: "string", default: "**/**.js" },
+		directory: { required: false, type: "path", default: "../../../../" },
+		groupFiles: { required: false, type: "bool", default: false },
+		fileSeparator: { require: false, type: "char", default: " " }
 	};
 
 	self.hasData = function(){
@@ -48,6 +48,8 @@ function TaskConfig(task) {
 			self.throwIfPropertyNotFound(key, value);
 			if (self.hasProperty(key))
 				result[key] = self.getProperty(key);
+			else
+				result[key] = value.default;
 		});
 
 		return result;

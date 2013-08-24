@@ -54,9 +54,9 @@ function TaskFactory(task) {
 		grunt.log.debug("spawn::lib::TaskFactory::#buildTasks()::After files get");
 		
 		var wildcard = new Wildcard();
-		var filteredFiles = wildcard.match(config.pattern, files);
+		var filteredFiles = wildcard.matches(config.pattern, files);
 
-		if (config.getGroupFiles()) {
+		if (config.groupFiles) {
 			var groupedFiles = filteredFiles.join(config.fileSeparator);
 			var args = self.format(config.arguments, groupedFiles);
 			var taskArgs = new TaskArgs(config.command, args);
