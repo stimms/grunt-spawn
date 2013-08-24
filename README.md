@@ -74,31 +74,27 @@ You can use the following example to setup your grunt file.
         ]
       },
 
-
       spawn: {
+        echo: {
+          command: "echo",
+          arguments: ["{0}"], 
+          directory: "./tests",
+          pattern: "**/*.js",
+          useQuotes: true,
+          quoteDelimiter: "\"",
+          groupFiles: true,
+          fileDelimiter: " "
+        },
         list: {
-          cmd: "ls", 
-          args: [
-            "-la"
-          ]
-        }, 
+          command: "ls",
+          arguments: ["-la", "{0}"], 
+          directory: "./tests"
+        },
         test: {
-          cmd: "mocha", 
-          clump: false,
-          args: [
-            "--reporter", 
-            "spec",
-            "{0}"
-          ],
-          incl: [{
-            op: "startsWith", 
-            val: "tests/"
-          }],
-          files: [{
-            cwd: ".", 
-            expand: true, 
-            src: ["**/*.js"]
-          }]
+          command: "mocha",
+          arguments: ["--reporter", "spec", "{0}"],
+          directory: "./tests",
+          pattern: "**/*.js"
         }
       },
 
@@ -133,6 +129,10 @@ You can use the following example to setup your grunt file.
 
 Pay special attention to the spawn task above. There are two targets namely `list` which is merely a demonstration of a bare bones shell command and `test` which demonstrates how this plugin can be tweaked to do slightly more fine grained spawning. Grunt-cli commands below: 
 
+    grunt spawn:echo
+
+OR
+
     grunt spawn:list
 
 OR
@@ -141,16 +141,13 @@ OR
 
 Here is a brief description of the elements involved:
 
- - `cmd`: The path to the executable you would like to spawn
- - `clump`: True for one spawn command, many files. False for one spawn command per file.
- - `args`: The parameters you want to supply to the cmd
- - `special args`:{0}: The parameter where the file/files should be put
- - `incl`: Additional filtering you might want to do for inclusions
- - `incl/op`: This would be the function to match backed on to string.js(see npm)
- - `incl'/val`: The value that should be used for the string comparison
- - `excl`: Same as incl but just the opposite
- - `excl/op`: Same as incl but just the opposite
- - `excl'/val`: Same as incl but just the opposite
- - `files`: Please see the in depth article on how to configure tasks on the gruntjs web
+ - command: "echo" -> Any command
+ - arguments: ["{0}"] -> Arguments where '{0}' is a placeholder for a file
+ - directory: "./tests" -> Working directory
+ - pattern: "**/*.js" -> Globbing wildcard based on minimatch
+ - useQuotes: true -> Whether to use the quote delimiter or not
+ - quoteDelimiter: "\"" -> The actual quote delimiter if useQuotes = true
+ - groupFiles: true -> Whether to group files into a single string
+ - fileDelimiter: " " -> The file delimiter if groupFiles = true
 
 Ciao! :)
