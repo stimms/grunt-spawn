@@ -24,7 +24,7 @@
     "string": "1.x.x",
     "fs-tools": "0.2.x",
     "string-format": "0.x.x", 
-    "wildcard": "0.1.x"
+    "minimatch": "0.2.x"
   },
   "devDependencies": {
     "mocha": "1.10.x",

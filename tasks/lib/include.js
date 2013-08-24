@@ -10,7 +10,7 @@ grunt = require("grunt");
 async = require("async");
 assert = require("assert");
 fstools = require("fs-tools");
-wildcard = require("wildcard");
+Minimatch = require("minimatch").Minimatch;
 
 l = function(val) { console.log(val); }
 i = function(val) { return util.inspect(val); }
