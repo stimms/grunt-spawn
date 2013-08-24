@@ -6,12 +6,16 @@ describe("Given Spawn()", function() {
 		spawn: {
 			list: {
 				command: "ls",
-				arguments: ["-la"]
+				arguments: ["-la", "{0}"], 
+				directory: __dirname,
+				pattern: "**/*.js",
+				groupFiles: true,
+				fileSeparator: " "
 			},
 			print: {
 				command: "cat",
 				arguments: ["{0}"],
-				directory: "../../",
+				directory: __dirname,
 				pattern: "**/*.js" 
 			}
 		}

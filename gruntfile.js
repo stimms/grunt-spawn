@@ -10,25 +10,36 @@ module.exports = function(grunt) {
       files: ["package.json", "gruntfile.js", "lib/**/*.js", "test/**/*.js"]
     },
 
-
     spawn: {
+      echo: {
+        command: "echo",
+        arguments: ["{0}"], 
+        directory: "./tests",
+        pattern: "**/*.js",
+        useQuotes: true,
+        quoteDelimiter: "\"",
+        groupFiles: true,
+        fileDelimiter: " "
+      },
       list: {
-        cmd: "ls",
-        args: ["-la"]
+        command: "ls",
+        arguments: ["-la", "{0}"], 
+        directory: "./tests",
+        pattern: "**/*.js",
+        useQuotes: false,
+        quoteDelimiter: "'",
+        groupFiles: false,
+        fileDelimiter: " "
       },
       test: {
-        cmd: "mocha",
-        clump: false,
-        args: ["--reporter", "spec", "{0}"],
-        incl: [{
-          op: "startsWith",
-          val: "tests/"
-        }],
-        files: [{
-          cwd: ".",
-          expand: true,
-          src: ["**/*.js"]
-        }]
+        command: "mocha",
+        arguments: ["--reporter", "spec", "{0}"],
+        directory: "./tests",
+        pattern: "**/*.js",
+        useQuotes: false,
+        quoteDelimiter: "'",
+        groupFiles: false,
+        fileDelimiter: " "
       }
     },
 

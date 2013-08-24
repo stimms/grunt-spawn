@@ -10,12 +10,14 @@ function TaskConfig(task) {
 	self.taskHasData = self._task.has("data");
 
 	self.propertyDefinitions = {
-		command: { required: true, type: "path", default: "ls" },
-		arguments: { required: false, type: "array", default: "{0}" },
-		pattern: { required: true, type: "string", default: "**/**.js" },
-		directory: { required: false, type: "path", default: "../../../../" },
-		groupFiles: { required: false, type: "bool", default: false },
-		fileSeparator: { require: false, type: "char", default: " " }
+		command: { required: true, type: "path", defaultValue: "ls" },
+		arguments: { required: false, type: "array", defaultValue: "{0}" },
+		directory: { required: false, type: "path", defaultValue: "../../../../" },
+		pattern: { required: true, type: "string", defaultValue: "**/**.js" },
+		useQuotes: { required: true, type: "bool", defaultValue: false },
+		quoteDelimiter: { required: true, type: "char", defaultValue: "\"" },
+		groupFiles: { required: false, type: "bool", defaultValue: false },
+		fileDelimiter: { require: false, type: "char", defaultValue: " " }
 	};
 
 	self.hasData = function(){
@@ -49,7 +51,7 @@ function TaskConfig(task) {
 			if (self.hasProperty(key))
 				result[key] = self.getProperty(key);
 			else
-				result[key] = value.default;
+				result[key] = value.defaultValue;
 		});
 
 		return result;

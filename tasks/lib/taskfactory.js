@@ -36,6 +36,14 @@ function TaskFactory(task) {
 		return formattedArgs;
 	};
 
+	self.quoteWith = function(delimiter, stringArray) {
+		var result = [];
+		_(stringArray).each(function(str){
+			result.push(delimiter + str + delimiter);
+		});
+		return result;
+	};
+
 	self.buildTasks = function(){
 
 		grunt.log.debug("spawn::lib::TaskFactory::#buildTasks() ->");
@@ -56,8 +64,11 @@ function TaskFactory(task) {
 		var wildcard = new Wildcard();
 		var filteredFiles = wildcard.matches(config.pattern, files);
 
+		if(config.useQuotes)
+			filteredFiles = self.quoteWith(config.quoteDelimiter, filteredFiles);
+
 		if (config.groupFiles) {
-			var groupedFiles = filteredFiles.join(config.fileSeparator);
+			var groupedFiles = filteredFiles.join(config.fileDelimiter);
 			var args = self.format(config.arguments, groupedFiles);
 			var taskArgs = new TaskArgs(config.command, args);
 			var task = new Task(taskArgs);

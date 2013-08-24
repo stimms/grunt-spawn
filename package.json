@@ -1,6 +1,6 @@
 {
   "name": "grunt-spawn",
-  "version": "0.0.8",
+  "version": "1.0.0",
   "private": false,
   "author": "fir3pho3nixx@gmail.com",
   "description": "A process launcher that does what it says on the tin",
@@ -35,7 +35,7 @@
     "grunt-contrib-jshint": "0.6.0"
   },
   "scripts": {
-    "test": "node_modules/grunt-cli/bin/grunt test --debug",
+    "test": "node_modules/grunt-cli/bin/grunt test",
     "publish": "node_modules/grunt-cli/bin/grunt release"
   },
   "engines": {
