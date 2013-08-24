@@ -12,7 +12,7 @@ describe("Given Wildcard()", function(){
 		it("Then should match correctly", function(){
 
 			var result = wildcard.matches("anyValue", "anyValue");
-			ll(result);
+			assert(result == true, "Failed to match identicle values");
 
 		});
 
@@ -25,7 +25,8 @@ describe("Given Wildcard()", function(){
 		it("Then should match correclty", function(){
 
 			var result = wildcard.matches("anyValue", ["anyValue"]);
-			ll(result);
+			assert(_(result).isArray() == true, "An array in should be an array out");
+			assert(result.length == 1, "Should have matched identicle values");
 
 		});
 
@@ -35,12 +36,11 @@ describe("Given Wildcard()", function(){
 
 		var wildcard = new Wildcard();
 
-		it("Then should match correclty", function(){
+		it("Then should match all three array elements", function(){
 
-			// TODO: Figure out why the wildcard '*' does not seem to have any significance
-			// TODO: When comparing values using the wildcard function
-			var result = wildcard.matches("*Value*", ["anyValue1", "anyValue2", "anyValue3"]);
-			ll(result);
+			var result = wildcard.matches("any*", ["anyValue1", "anyValue2", "anyValue3"]);
+			assert(_(result).isArray() == true, "Should be an array");
+			assert(result.length == 3, "Should have 3 results");
 
 		});
 
