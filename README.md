@@ -141,13 +141,13 @@ OR
 
 Here is a brief description of the elements involved:
 
- - command: "echo" -> Any command
- - arguments: ["{0}"] -> Arguments where '{0}' is a placeholder for a file
- - directory: "./tests" -> Working directory
- - pattern: "**/*.js" -> Globbing wildcard based on minimatch
- - useQuotes: true -> Whether to use the quote delimiter or not
- - quoteDelimiter: "\"" -> The actual quote delimiter if useQuotes = true
- - groupFiles: true -> Whether to group files into a single string
- - fileDelimiter: " " -> The file delimiter if groupFiles = true
+ - `command`: "echo" -> Any command
+ - `arguments`: ["{0}"] -> Arguments where '{0}' is a placeholder for a file
+ - `directory`: "./tests" -> Working directory
+ - `pattern`: "**/*.js" -> Globbing wildcard based on minimatch
+ - `useQuotes`: true -> Whether to use the quote delimiter or not
+ - `quoteDelimiter`: "\"" -> The actual quote delimiter if useQuotes = true
+ - `groupFiles`: true -> Whether to group files into a single string
+ - `fileDelimiter`: " " -> The file delimiter if groupFiles = true
 
 Ciao! :)
