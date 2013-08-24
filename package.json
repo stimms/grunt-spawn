@@ -35,7 +35,7 @@
     "grunt-contrib-jshint": "0.6.0"
   },
   "scripts": {
-    "test": "node_modules/grunt-cli/bin/grunt test",
+    "test": "node_modules/grunt-cli/bin/grunt test --debug",
     "publish": "node_modules/grunt-cli/bin/grunt release"
   },
   "engines": {

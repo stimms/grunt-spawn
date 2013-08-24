@@ -7,12 +7,16 @@ function FileBuilder() {
 	self.rootDirectory = path.normalize(__dirname + "/../../");
 
 	self.setDirectory = function(directory) {
+
+		assert(directory, "FileBuilder::setDirectory(directory != null)");
+
 		self.rootDirectory = path.normalize(directory);
+		return this;
 	};
 
 	self.eachDirectory = function(directoryCallback) {
 		
-		assert(directoryCallback, "directoryCallback == null");
+		assert(directoryCallback, "FileBuilder::eachDirectory(directoryCallback != null)");
 		
 		var results = [];
 
@@ -48,7 +52,7 @@ function FileBuilder() {
 
 	self.eachFile = function(fileCallback) {
 
-		assert(fileCallback, "fileCallback == null");
+		assert(fileCallback, "FileBuilder::eachFile(fileCallback != null)");
 		
 		fstools.walkSync(
 			self.rootDirectory, 
