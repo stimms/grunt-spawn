@@ -1,14 +1,10 @@
 path = require("path");
 
 module.exports = function(grunt) {
-  //grunt.option("force", true);
+  grunt.option("force", true);
   grunt.initConfig({
 
     pkg: grunt.file.readJSON("package.json"),
-
-    jshint: {
-      files: ["package.json", "gruntfile.js", "lib/**/*.js", "test/**/*.js"]
-    },
 
     spawn: {
       echo: {
@@ -49,11 +45,8 @@ module.exports = function(grunt) {
 
   });
 
-
   grunt.loadTasks("./tasks");
   grunt.loadNpmTasks("grunt-release");
-  grunt.loadNpmTasks("grunt-contrib-jshint");
-
   grunt.registerTask("test", ["spawn:test"]);
   grunt.registerTask("default", ["spawn:test"]);
 
