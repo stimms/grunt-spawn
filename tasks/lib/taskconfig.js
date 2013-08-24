@@ -11,11 +11,11 @@ function TaskConfig(task) {
 
 	self.propertyDefinitions = {
 		command: { required: true, type: "path", defaultValue: "ls" },
-		arguments: { required: false, type: "array", defaultValue: "{0}" },
+		arguments: { required: false, type: "array", defaultValue: ["{0}"] },
 		directory: { required: false, type: "path", defaultValue: "../../../../" },
-		pattern: { required: true, type: "string", defaultValue: "**/**.js" },
-		useQuotes: { required: true, type: "bool", defaultValue: false },
-		quoteDelimiter: { required: true, type: "char", defaultValue: "\"" },
+		pattern: { required: false, type: "string", defaultValue: "**/*.js" },
+		useQuotes: { required: false, type: "bool", defaultValue: false },
+		quoteDelimiter: { required: false, type: "char", defaultValue: "\"" },
 		groupFiles: { required: false, type: "bool", defaultValue: false },
 		fileDelimiter: { require: false, type: "char", defaultValue: " " }
 	};
@@ -25,14 +25,12 @@ function TaskConfig(task) {
 	};
 
 	self.hasProperty = function(propertyName) {
-		var result = self.hasData() && !_.isNull(self.task.data[propertyName]);
+		var result = self.hasData() && _(self.task.data).has(propertyName);
 		return result;
 	};
 
 	self.getProperty = function(propertyName) {
 		var result = self.task.data[propertyName];
-		grunt.log.debug("propertyName = " + i(propertyName));
-		grunt.log.debug("result = " + i(self.task));
 		return result;
 	};
 
@@ -47,11 +45,12 @@ function TaskConfig(task) {
 		var result = {};
 
 		_(self.propertyDefinitions).forIn(function(value, key, object){
-			self.throwIfPropertyNotFound(key, value);
+			var propertyValue = value.defaultValue;
+			if (value.required)
+				self.throwIfPropertyNotFound(key, value);
 			if (self.hasProperty(key))
-				result[key] = self.getProperty(key);
-			else
-				result[key] = value.defaultValue;
+				propertyValue = self.getProperty(key);
+			result[key] = propertyValue;
 		});
 
 		return result;

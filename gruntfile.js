@@ -24,12 +24,7 @@ module.exports = function(grunt) {
       list: {
         command: "ls",
         arguments: ["-la", "{0}"], 
-        directory: "./tests",
-        pattern: "**/*.js",
-        useQuotes: false,
-        quoteDelimiter: "'",
-        groupFiles: false,
-        fileDelimiter: " "
+        directory: "./tests"
       },
       test: {
         command: "mocha",
