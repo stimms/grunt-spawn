@@ -30,11 +30,7 @@ module.exports = function(grunt) {
         command: "mocha",
         arguments: ["--reporter", "spec", "{0}"],
         directory: "./tests",
-        pattern: "**/*.js",
-        useQuotes: false,
-        quoteDelimiter: "'",
-        groupFiles: false,
-        fileDelimiter: " "
+        pattern: "**/*.js"
       }
     },
 
