@@ -1,15 +1,16 @@
-grunt = require("grunt");
-should = require("should");
+var grunt = require("grunt");
+var assert = require("assert");
+var should = require("should");
 
-TaskFactory = require("../../tasks/lib/taskfactory");
-FileBuilder = require("../../tasks/lib/filebuilder");
+var TaskFactory = require("../../tasks/lib/taskfactory");
+var FileBuilder = require("../../tasks/lib/filebuilder");
 
 describe("Given TaskFactory() with files", function() {
 
 	var task = {
 		data: {
 			command: "command",
-			arguments: ["arg1", "arg2", "{0}"],
+			commandArgs: ["arg1", "arg2", "{0}"],
 			directory: __dirname, 
 			pattern: "**/*.js"
 		},

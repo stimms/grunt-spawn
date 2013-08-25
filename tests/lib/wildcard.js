@@ -1,7 +1,8 @@
-require("../../tasks/lib/include");
+var _ = require("lodash");
 
-Wildcard = require("../../tasks/lib/wildcard");
-FileBuilder = require("../../tasks/lib/filebuilder");
+var assert = require("assert");
+var Wildcard = require("../../tasks/lib/wildcard");
+var FileBuilder = require("../../tasks/lib/filebuilder");
 
 describe("Given Wildcard()", function(){
 

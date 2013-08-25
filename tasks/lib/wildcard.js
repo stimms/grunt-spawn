@@ -1,12 +1,14 @@
-require("./include");
+var _ = require("lodash");
+var Minimatch = require("minimatch").Minimatch;
 
 function Wildcard() {
-	
+	'use strict';
+
 	var self = this;
 
 	self.isArrayAndNotNull = function(value) {
 		return !_.isNull(value) && _(value).isArray();
-	}
+	};
 
 	self.matchArray = function(pattern, values){
 		var results = [];
@@ -31,6 +33,7 @@ function Wildcard() {
 
 		if (self.isArrayAndNotNull(listOfValues))
 			return self.matchArray(pattern, listOfValues);
+
 		return self.matchSingle(pattern, listOfValues);
 	};
 }

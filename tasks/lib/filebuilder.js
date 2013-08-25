@@ -1,7 +1,11 @@
-require("./include");
+var _ = require("lodash");
+var path = require("path");
+var assert = require("assert");
+var fstools = require("fs-tools");
 
 function FileBuilder() {
-
+	'use strict';
+	
 	var self = this;
 	self.scanPattern = /.*/;
 	self.rootDirectory = path.normalize(__dirname + "/../../");

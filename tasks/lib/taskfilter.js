@@ -1,6 +1,10 @@
-require("./include");
+var _ = require("lodash");
+var S = require("string");
+var util = require("util");
+var grunt = require('grunt');
 
 function TaskFilter(task) {
+	'use strict';
 
 	var self = this;
 
@@ -47,7 +51,7 @@ function TaskFilter(task) {
 		grunt.log.debug("spawn::lib::TaskFilter::#exclude() <-");
 
 		return result;
-	}
+	};
 
 	self.zap = function(files) {
 

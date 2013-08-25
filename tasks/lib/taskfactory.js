@@ -1,13 +1,20 @@
-require("./include");
+require("string-format");
 
-Task = require("./task");
-TaskArgs = require("./taskargs");
-TaskConfig = require("./taskconfig");
-TaskFilter = require("./taskfilter");
-FileBuilder = require("./filebuilder");
-Wildcard = require("./wildcard");
+var _ = require("lodash");
+var util = require("util");
+var Task = require("./task");
+var grunt = require('grunt');
+var assert = require("assert");
+var Wildcard = require("./wildcard");
+var TaskArgs = require("./taskargs");
+var TaskConfig = require("./taskconfig");
+var TaskFilter = require("./taskfilter");
+var FileBuilder = require("./filebuilder");
+var i = function(val) { return util.inspect(val); };
+
 
 function TaskFactory(task) {
+	'use strict';
 
 	assert(task, "TaskFactory::task = null");
 
@@ -21,13 +28,13 @@ function TaskFactory(task) {
 
 		grunt.log.debug("spawn::lib::TaskFactory::#format() ->");
 
-		formattedArgs = [];
+		var formattedArgs = [];
 
 		_.each(args, function(arg) {
 			if (!_.isNull(filepath)) {
 				formattedArgs.push(arg.format(filepath));
 			} else {
-				if (arg != "{0}") formattedArgs.push(arg);
+				if (arg !== "{0}") formattedArgs.push(arg);
 			}
 		});
 
@@ -69,13 +76,13 @@ function TaskFactory(task) {
 
 		if (config.groupFiles) {
 			var groupedFiles = filteredFiles.join(config.fileDelimiter);
-			var args = self.format(config.arguments, groupedFiles);
+			var args = self.format(config.commandArgs, groupedFiles);
 			var taskArgs = new TaskArgs(config.command, args);
 			var task = new Task(taskArgs);
 			tasks.push(task);
 		} else {
 			_(files).each(function(file){
-				var args = self.format(config.arguments, file);
+				var args = self.format(config.commandArgs, file);
 				var taskArgs = new TaskArgs(config.command, args);
 				var task = new Task(taskArgs);
 				tasks.push(task);

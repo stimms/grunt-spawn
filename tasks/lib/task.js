@@ -1,7 +1,10 @@
-require("./include");
+var _ = require("lodash");
+var S = require("string");
+var grunt = require("grunt");
 
 function Task(taskArgs) {
-
+	'use strict';
+	
 	var self = this;
 	self.cmd = taskArgs.cmd;
 	self.args = taskArgs.args;
@@ -32,12 +35,12 @@ function Task(taskArgs) {
 
 		spawn.on("error", function() {
 			grunt.fail.fatal("Spawn: A child process generated error. Exiting.", 1);
-		})
+		});
 
 		spawn.on("exit", function(code) {
 			if (done != null) done(code);
 			if (code !== 0) grunt.fail.fatal("Spawn: A child process generated error. Exiting.", 1);
-		})
+		});
 
 		grunt.log.debug("spawn::lib::Task::#execute() <-");
 	};

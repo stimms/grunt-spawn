@@ -1,4 +1,4 @@
-grunt = require("grunt");
+var grunt = require("grunt");
 
 describe("Given Spawn()", function() {
 
@@ -6,7 +6,7 @@ describe("Given Spawn()", function() {
 		spawn: {
 			list: {
 				command: "ls",
-				arguments: ["-la", "{0}"], 
+				commandArgs: ["-la", "{0}"], 
 				directory: __dirname,
 				pattern: "**/*.js",
 				groupFiles: true,
@@ -14,7 +14,7 @@ describe("Given Spawn()", function() {
 			},
 			print: {
 				command: "cat",
-				arguments: ["{0}"],
+				commandArgs: ["{0}"],
 				directory: __dirname,
 				pattern: "**/*.js" 
 			}

@@ -1,4 +1,9 @@
-require("../../tasks/lib/include");
+require("string-format");
+
+var S = require("string");
+var _ = require("lodash");
+var path = require("path");
+var assert = require("assert");
 
 should = require("should");
 FileBuilder = require("../../tasks/lib/filebuilder");
