@@ -77,7 +77,7 @@ You can use the following example to setup your grunt file.
       spawn: {
         echo: {
           command: "echo",
-          arguments: ["{0}"], 
+          commandArgs: ["{0}"], 
           directory: "./tests",
           pattern: "**/*.js",
           useQuotes: true,
@@ -87,12 +87,12 @@ You can use the following example to setup your grunt file.
         },
         list: {
           command: "ls",
-          arguments: ["-la", "{0}"], 
+          commandArgs: ["-la", "{0}"], 
           directory: "./tests"
         },
         test: {
           command: "mocha",
-          arguments: ["--reporter", "spec", "{0}"],
+          commandArgs: ["--reporter", "spec", "{0}"],
           directory: "./tests",
           pattern: "**/*.js"
         }
@@ -142,7 +142,7 @@ OR
 Here is a brief description of the elements involved:
 
  - `command`: "echo" -> Any command
- - `arguments`: ["{0}"] -> Arguments where '{0}' is a placeholder for a file
+ - `commandArgs`: ["{0}"] -> commandArgs where '{0}' is a placeholder for a file
  - `directory`: "./tests" -> Working directory
  - `pattern`: "**/*.js" -> Globbing wildcard based on minimatch
  - `useQuotes`: true -> Whether to use the quote delimiter or not

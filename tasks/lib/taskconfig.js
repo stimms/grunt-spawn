@@ -1,4 +1,9 @@
+var _ = require("lodash");
+var assert = require('assert');
+
+
 function TaskConfig(task) {
+	'use strict';
 
 	assert(task, "TaskConfig::task = null");
 	
@@ -11,7 +16,7 @@ function TaskConfig(task) {
 
 	self.propertyDefinitions = {
 		command: { required: true, type: "path", defaultValue: "ls" },
-		arguments: { required: false, type: "array", defaultValue: ["{0}"] },
+		commandArgs: { required: false, type: "array", defaultValue: ["{0}"] },
 		directory: { required: false, type: "path", defaultValue: "../../../../" },
 		pattern: { required: false, type: "string", defaultValue: "**/*.js" },
 		useQuotes: { required: false, type: "bool", defaultValue: false },

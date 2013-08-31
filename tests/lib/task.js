@@ -1,8 +1,10 @@
-grunt = require("grunt");
-should = require("should");
+require("string-format");
 
-Task = require("../../tasks/lib/task");
-TaskArgs = require("../../tasks/lib/taskargs");
+var grunt = require("grunt");
+var should = require("should");
+
+var Task = require("../../tasks/lib/task");
+var TaskArgs = require("../../tasks/lib/taskargs");
 
 describe("Given Task('ls', ['-la'])", function() {
 

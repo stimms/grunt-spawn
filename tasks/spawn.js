@@ -1,9 +1,10 @@
-require("./lib/include");
-
-grunt = require("grunt");
-spawn = require("./lib");
+var _ = require("lodash");
+var async = require("async");
+var grunt = require("grunt");
+var spawn = require("./lib");
 
 grunt.registerMultiTask("spawn", function() {
+	'use strict';
 
 	var counter = 0;
 	var actions = [];
