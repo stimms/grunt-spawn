@@ -37,18 +37,18 @@ module.exports = function(grunt) {
       options: {
         bump: true,
         file: "package.json",
-        add: true,
-        commit: true,
-        tag: true,
-        push: true,
-        pushTags: true,
+        add: false,
+        commit: false,
+        tag: false,
+        push: false,
+        pushTags: false,
         npm: true
       }
     }
 
   });
 
-  grunt.loadTasks(__dirname + "/tasks");
+  grunt.loadTasks("./tasks");
   grunt.loadNpmTasks("grunt-release");
   grunt.registerTask("test", ["spawn:test"]);
   grunt.registerTask("default", ["spawn:test"]);
