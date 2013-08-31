@@ -1,17 +1,10 @@
-require("string-format");
+require("./include");
 
-var _ = require("lodash");
-var util = require("util");
 var Task = require("./task");
-var grunt = require('grunt');
-var assert = require("assert");
-var Wildcard = require("./wildcard");
 var TaskArgs = require("./taskargs");
 var TaskConfig = require("./taskconfig");
-var TaskFilter = require("./taskfilter");
+var Wildcard = require("./wildcard");
 var FileBuilder = require("./filebuilder");
-var i = function(val) { return util.inspect(val); };
-
 
 function TaskFactory(task) {
 	'use strict';
@@ -20,7 +13,6 @@ function TaskFactory(task) {
 
 	var self = this;
 	self.config = new TaskConfig(task);
-	self.filter = new TaskFilter(task);
 
 	grunt.log.debug("spawn::lib::TaskFactory::#ctor() ->");
 

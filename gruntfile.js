@@ -3,21 +3,12 @@ var path = require("path");
 module.exports = function(grunt) {
   'use strict';
 
-  grunt.option("force", true);
+  grunt.option("force", false);
+
   grunt.initConfig({
 
     pkg: grunt.file.readJSON("package.json"),
 
-    jshint: {
-      all: [
-        'gruntfile.js',
-        'tasks/*.js',
-        'tasks/lib/*.js',
-      ],
-      options: {
-        jshintrc: '.jshintrc',
-      },
-    },
     spawn: {
       echo: {
         command: "echo",
@@ -57,12 +48,9 @@ module.exports = function(grunt) {
 
   });
 
-  grunt.loadTasks("./tasks");
-
+  grunt.loadTasks(__dirname + "/tasks");
   grunt.loadNpmTasks("grunt-release");
-  grunt.loadNpmTasks("grunt-contrib-jshint");
-
   grunt.registerTask("test", ["spawn:test"]);
-  grunt.registerTask("default", ["jshint","spawn:test"]);
+  grunt.registerTask("default", ["spawn:test"]);
 
 };

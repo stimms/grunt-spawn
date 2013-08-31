@@ -1,6 +1,5 @@
-var _ = require("lodash");
+require("../../tasks/lib/include");
 
-var assert = require("assert");
 var Wildcard = require("../../tasks/lib/wildcard");
 var FileBuilder = require("../../tasks/lib/filebuilder");
 
@@ -47,22 +46,20 @@ describe("Given Wildcard()", function(){
 
 	});
 	
-	// describe("When #matches() with FileBuilder() #allDirectories()", function(){
+	describe("When #matches() with FileBuilder() #allDirectories()", function(){
 
-	// 	var wildcard = new Wildcard();
-	// 	var fileBuilder = new FileBuilder();
-	// 	var allFiles = fileBuilder.allFiles();
-	// 	ll(allFiles);
+		var wildcard = new Wildcard();
+		var fileBuilder = new FileBuilder().setDirectory("../../");
+		var allFiles = fileBuilder.allFiles();
 
-	// 	it("Then should find package.*", function(){
+		it("Then should find package.json", function(){
 
-	// 		var pattern = "*package.*";
-	// 		var result = wildcard.matches(pattern, allFiles);
-	// 		ll(result);
-	// 		//assert(result.length > 0, "Could not find any matches for 'package.json'");
+			var pattern = "**/package.json";
+			var result = wildcard.matches(pattern, allFiles);
+			assert(result.length > 0, "Could not find any matches for 'package.json'");
 
-	// 	});
+		});
 
-	// });
+	});
 
 });

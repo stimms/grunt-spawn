@@ -1,5 +1,4 @@
-var _ = require("lodash");
-var Minimatch = require("minimatch").Minimatch;
+require("./include");
 
 function Wildcard() {
 	'use strict';
@@ -13,10 +12,9 @@ function Wildcard() {
 	self.matchArray = function(pattern, values){
 		var results = [];
 		var _values = _(values);
-		var patternMatch = new Minimatch(pattern);
 		if (self.isArrayAndNotNull(values)) {
 			_values.each(function(value){
-				if (patternMatch.match(value)) {
+				if (minimatch(value, pattern, { matchBase: true })) {
 					results.push(value);
 				}
 			});
@@ -25,15 +23,13 @@ function Wildcard() {
 	};
 
 	self.matchSingle = function(pattern, value){
-		var patternMatch = new Minimatch(pattern);
-		return !_.isNull(value) && patternMatch.match(value) ? true : false;
+		return minimatch(value, pattern, { matchBase: true });
 	};
 
 	self.matches = function(pattern, listOfValues) {
-
-		if (self.isArrayAndNotNull(listOfValues))
+		if (self.isArrayAndNotNull(listOfValues)) {
 			return self.matchArray(pattern, listOfValues);
-
+		}
 		return self.matchSingle(pattern, listOfValues);
 	};
 }

@@ -1,10 +1,9 @@
-var _ = require("lodash");
-var async = require("async");
-var grunt = require("grunt");
-var spawn = require("./lib");
+require("./lib/include");
 
 grunt.registerMultiTask("spawn", function() {
 	'use strict';
+
+	var spawn = require("./lib");
 
 	var counter = 0;
 	var actions = [];

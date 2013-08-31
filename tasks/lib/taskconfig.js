@@ -1,6 +1,4 @@
-var _ = require("lodash");
-var assert = require('assert');
-
+require("./include");
 
 function TaskConfig(task) {
 	'use strict';

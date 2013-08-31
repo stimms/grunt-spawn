@@ -1,3 +1,5 @@
+require("./include");
+
 function TaskArgs(cmd, args) {
 	var self = this;
 

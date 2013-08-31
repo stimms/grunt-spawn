@@ -1,5 +1,4 @@
-should = require("should");
-assert = require("assert");
+require("../../tasks/lib/include");
 
 describe("Given spawn.*", function() {
 

@@ -1,7 +1,4 @@
-var _ = require("lodash");
-var path = require("path");
-var assert = require("assert");
-var fstools = require("fs-tools");
+require("./include");
 
 function FileBuilder() {
 	'use strict';

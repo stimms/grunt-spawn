@@ -1,11 +1,5 @@
-require("string-format");
 
-var S = require("string");
-var _ = require("lodash");
-var path = require("path");
-var assert = require("assert");
-
-should = require("should");
+require("../../tasks/lib/include");
 FileBuilder = require("../../tasks/lib/filebuilder");
 
 describe("Given FileBuilder()", function(){

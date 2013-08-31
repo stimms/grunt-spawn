@@ -1,7 +1,4 @@
-require("string-format");
-
-var grunt = require("grunt");
-var should = require("should");
+require("../../tasks/lib/include");
 
 var Task = require("../../tasks/lib/task");
 var TaskArgs = require("../../tasks/lib/taskargs");
@@ -26,7 +23,7 @@ describe("Given Task('ls', ['-la'])", function() {
 		it("Then should not throw", function(done) {
 
 			task.execute(function(code) {
-				code.should.equal(0);
+				assert(code == 0, "Task did not exit cleanly");
 				done();
 			});
 

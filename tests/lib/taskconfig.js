@@ -1,7 +1,4 @@
-
-var grunt = require("grunt");
-var assert = require("assert");
-var should = require("should");
+require("../../tasks/lib/include");
 
 var TaskConfig = require("../../tasks/lib/taskconfig");
 

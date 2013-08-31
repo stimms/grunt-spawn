@@ -1,6 +1,4 @@
-var _ = require("lodash");
-var S = require("string");
-var grunt = require("grunt");
+require("./include");
 
 function Task(taskArgs) {
 	'use strict';

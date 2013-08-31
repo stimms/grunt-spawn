@@ -1,4 +1,4 @@
-var grunt = require("grunt");
+require("../tasks/lib/include");
 
 describe("Given Spawn()", function() {
 
@@ -21,7 +21,7 @@ describe("Given Spawn()", function() {
 		}
 	});
 
-	grunt.loadTasks("tasks/");
+	grunt.loadTasks(__dirname + "/../tasks/");
 
 	describe("When #list()", function() {
 

@@ -1,6 +1,4 @@
-var grunt = require("grunt");
-var assert = require("assert");
-var should = require("should");
+require("../../tasks/lib/include");
 
 var TaskFactory = require("../../tasks/lib/taskfactory");
 var FileBuilder = require("../../tasks/lib/filebuilder");
@@ -25,9 +23,10 @@ describe("Given TaskFactory() with files", function() {
 		var result = taskFactory.format(args, file);
 
 		it("Then should have ['arg1', 'arg2', 'anyfile']", function() {
-			result.should.include("arg1");
-			result.should.include("arg2");
-			result.should.include("anyfile");
+			assert(result.length == 3);
+			assert(result[0] == "arg1");
+			assert(result[1] == "arg2");
+			assert(result[2] == "anyfile");
 		});
 
 	});
@@ -61,9 +60,11 @@ describe("Given TaskFactory() without files", function() {
 		var result = taskFactory.format(args);
 
 		it("Then should have ['arg1', 'arg2', 'arg3']", function() {
-			result.should.include("arg1");
-			result.should.include("arg2");
-			result.should.include("arg3");
+			assert(result.length == 3);
+			assert(result[0] == "arg1");
+			assert(result[1] == "arg2");
+			assert(result[2] == "arg3");
+
 		});
 
 	});
