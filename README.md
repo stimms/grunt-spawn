@@ -83,7 +83,8 @@ You can use the following example to setup your grunt file.
           useQuotes: true,
           quoteDelimiter: "\"",
           groupFiles: true,
-          fileDelimiter: " "
+          fileDelimiter: " ", 
+          ignore: ["notNeededFile.js"]
         },
         list: {
           command: "ls",
@@ -149,5 +150,6 @@ Here is a brief description of the elements involved:
  - `quoteDelimiter`: "\"" -> The actual quote delimiter if useQuotes = true
  - `groupFiles`: true -> Whether to group files into a single string
  - `fileDelimiter`: " " -> The file delimiter if groupFiles = true
+ - `ignore`: ["any.js"] -> The files you would like to exclude
 
 Ciao! :)
