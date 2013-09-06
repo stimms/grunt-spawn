@@ -61,7 +61,7 @@ describe("Given TaskFactory() with files", function() {
 				.allFiles();
 
 		it("Then should have {0} tasks".format(files.length), function() {
-			assert(tasks.length == files.length, "Tasks dont match files");
+			assert(tasks.length == (files.length - 1), "Tasks dont match files");
 		});
 
 	});

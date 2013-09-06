@@ -88,7 +88,7 @@ function TaskFactory(task) {
 			var task = new Task(taskArgs);
 			tasks.push(task);
 		} else {
-			_(files).each(function(file){
+			_(filteredFiles).each(function(file){
 				var args = self.format(config.commandArgs, file);
 				var taskArgs = new TaskArgs(config.command, args);
 				var task = new Task(taskArgs);
