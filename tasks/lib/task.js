@@ -8,7 +8,6 @@ function Task(taskArgs) {
 	self.args = taskArgs.args;
 
 	self.execute = function(done) {
-
 		grunt.log.debug("spawn::lib::Task::#execute() ->");
 
 		var options = {

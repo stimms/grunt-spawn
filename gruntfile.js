@@ -18,7 +18,8 @@ module.exports = function(grunt) {
         useQuotes: true,
         quoteDelimiter: "\"",
         groupFiles: true,
-        fileDelimiter: " "
+        fileDelimiter: " ", 
+        ignore: ["gruntfile.js"]
       },
       list: {
         command: "ls",
@@ -35,14 +36,14 @@ module.exports = function(grunt) {
 
     release: {
       options: {
-        bump: true,
+        bump: false,
         file: "package.json",
         add: false,
         commit: false,
         tag: false,
         push: false,
         pushTags: false,
-        npm: true
+        npm: false
       }
     }
 

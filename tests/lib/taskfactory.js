@@ -10,7 +10,8 @@ describe("Given TaskFactory() with files", function() {
 			command: "command",
 			commandArgs: ["arg1", "arg2", "{0}"],
 			directory: __dirname, 
-			pattern: "**/*.js"
+			pattern: "**/*.js",
+			ignore: ["wildcard.js"]
 		},
 	};
 
@@ -27,6 +28,25 @@ describe("Given TaskFactory() with files", function() {
 			assert(result[0] == "arg1");
 			assert(result[1] == "arg2");
 			assert(result[2] == "anyfile");
+		});
+
+	});
+
+	describe("When #shouldIgnore()", function(){
+
+		it("Then should exclude wildcard.js", function(){
+			var result = taskFactory.shouldIgnore("anyDir/wildcard.js");
+			assert(result, "Ignore logic in factory failed");
+		});
+
+	});
+
+	describe("When #filterIgnoredFiles", function(){
+
+		it("Then should remove wildcard.js", function(){
+			var files = ["anyFile.js", "wildcard.js"];
+			var result = taskFactory.filterIgnoredFiles(files);
+			assert(result.length == 1);
 		});
 
 	});

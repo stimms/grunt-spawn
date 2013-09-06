@@ -17,11 +17,8 @@ function TaskFactory(task) {
 	grunt.log.debug("spawn::lib::TaskFactory::#ctor() ->");
 
 	self.format = function(args, filepath) {
-
 		grunt.log.debug("spawn::lib::TaskFactory::#format() ->");
-
 		var formattedArgs = [];
-
 		_.each(args, function(arg) {
 			if (!_.isNull(filepath)) {
 				formattedArgs.push(arg.format(filepath));
@@ -29,9 +26,7 @@ function TaskFactory(task) {
 				if (arg !== "{0}") formattedArgs.push(arg);
 			}
 		});
-
 		grunt.log.debug("spawn::lib::TaskFactory::#format() <-");
-
 		return formattedArgs;
 	};
 
@@ -39,6 +34,25 @@ function TaskFactory(task) {
 		var result = [];
 		_(stringArray).each(function(str){
 			result.push(delimiter + str + delimiter);
+		});
+		return result;
+	};
+
+	self.shouldIgnore = function(file){
+		var result = false;
+		_(self.config.get().ignore).each(function(ignoreFile){
+			if(S(file).endsWith(ignoreFile)){
+				result = true;
+			}
+		});
+		return result;
+	};
+
+	self.filterIgnoredFiles = function(files) {
+		var result = [];
+		_(files).each(function(file){
+			if (!self.shouldIgnore(file))
+				result.push(file);
 		});
 		return result;
 	};
@@ -62,6 +76,7 @@ function TaskFactory(task) {
 		
 		var wildcard = new Wildcard();
 		var filteredFiles = wildcard.matches(config.pattern, files);
+		filteredFiles = self.filterIgnoredFiles(filteredFiles);
 
 		if(config.useQuotes)
 			filteredFiles = self.quoteWith(config.quoteDelimiter, filteredFiles);

@@ -20,7 +20,8 @@ function TaskConfig(task) {
 		useQuotes: { required: false, type: "bool", defaultValue: false },
 		quoteDelimiter: { required: false, type: "char", defaultValue: "\"" },
 		groupFiles: { required: false, type: "bool", defaultValue: false },
-		fileDelimiter: { require: false, type: "char", defaultValue: " " }
+		fileDelimiter: { require: false, type: "char", defaultValue: " " },
+		ignore: { require: false, type: "array", defaultValue: [] }
 	};
 
 	self.hasData = function(){
@@ -44,9 +45,7 @@ function TaskConfig(task) {
 	};
 
 	self.get = function(){
-
 		var result = {};
-
 		_(self.propertyDefinitions).forIn(function(value, key, object){
 			var propertyValue = value.defaultValue;
 			if (value.required)
@@ -55,7 +54,6 @@ function TaskConfig(task) {
 				propertyValue = self.getProperty(key);
 			result[key] = propertyValue;
 		});
-
 		return result;
 
 	};
