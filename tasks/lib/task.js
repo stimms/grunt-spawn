@@ -35,6 +35,9 @@ function Task(taskArgs) {
 		});
 
 		spawn.on("exit", function(code) {
+			spawn.stdin.unpipe(process.stdin);
+			spawn.stdout.unpipe(process.stdout);
+			spawn.stderr.unpipe(process.stderr);
 			if (done != null) done(code);
 			if (code !== 0) grunt.fail.fatal("Spawn: A child process generated error. Exiting.", 1);
 		});
