@@ -21,7 +21,8 @@ function TaskConfig(task) {
 		quoteDelimiter: { required: false, type: "char", defaultValue: "\"" },
 		groupFiles: { required: false, type: "bool", defaultValue: false },
 		fileDelimiter: { require: false, type: "char", defaultValue: " " },
-		ignore: { require: false, type: "array", defaultValue: [] }
+		ignore: { require: false, type: "array", defaultValue: [] },
+		cwd: {require: false, type: "string", defaultValue: "."}
 	};
 
 	self.hasData = function(){
