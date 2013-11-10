@@ -7,6 +7,10 @@ function Task(taskArgs) {
 	self.cmd = taskArgs.cmd;
 	self.args = taskArgs.args;
 
+	self.fail = function(){
+		grunt.fail.fatal("Spawn: A child process generated error. Exiting.", 1);
+	};
+
 	self.execute = function(done) {
 		grunt.log.debug("spawn::lib::Task::#execute() ->");
 
@@ -39,14 +43,10 @@ function Task(taskArgs) {
 			spawn.stdout.unpipe(process.stdout);
 			spawn.stderr.unpipe(process.stderr);
 			if (done != null) done(code);
-			if (code !== 0) grunt.fail.fatal("Spawn: A child process generated error. Exiting.", 1);
+			if (code !== 0) self.fail();
 		});
 
 		grunt.log.debug("spawn::lib::Task::#execute() <-");
-	};
-
-	self.fail = function(){
-		grunt.fail.fatal("Spawn: A child process generated error. Exiting.", 1);
 	};
 }
 
