@@ -1,4 +1,5 @@
 require("../../tasks/lib/include");
+var fs = require("fs");
 
 var Wildcard = require("../../tasks/lib/wildcard");
 var FileBuilder = require("../../tasks/lib/filebuilder");
@@ -49,15 +50,19 @@ describe("Given Wildcard()", function(){
 	describe("When #matches() with FileBuilder() #allDirectories()", function(){
 
 		var wildcard = new Wildcard();
-		var fileBuilder = new FileBuilder().setDirectory("../../");
+		var fileBuilder = new FileBuilder().setDirectory(".");
 		var allFiles = fileBuilder.allFiles();
+		var testDirectory = "temp/";
+		var testFile = "file.json";
 
-		it("Then should find package.json", function(){
-
+		it("Then should find a nested file", function(){
+			fs.mkdirSync(testDirectory);
+			fs.writeFileSync(testDirectory + testFile, "");
 			var pattern = "**/package.json";
 			var result = wildcard.matches(pattern, allFiles);
-			assert(result.length > 0, "Could not find any matches for 'package.json'");
-
+			assert(result.length > 0, "Could not find any matches for '" + testFile + "'");
+			fs.unlinkSync(testDirectory + testFile);
+			fs.rmdirSync(testDirectory);
 		});
 
 	});

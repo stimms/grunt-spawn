@@ -13,8 +13,8 @@ function Task(taskArgs) {
 		var options = {
 			cmd: taskArgs.cmd,
 			args: taskArgs.args,
-			nodeSpawnOptions: {
-				stdio: "inherit"
+			opts: {
+				cwd: taskArgs.cwd
 			}
 		};
 
@@ -23,7 +23,7 @@ function Task(taskArgs) {
 		var spawnCommand = "{0} {1}".format(formattedCmd, formattedArgs);
 
 		grunt.log.subhead("\nSpawn: Launching child process");
-		grunt.log.ok("Spawn: Launching '{0}'".format(spawnCommand));
+		grunt.log.ok("Spawn: Launching '{0}' in '{1}'".format(spawnCommand, options.opts.cwd));
 
 		var spawn = grunt.util.spawn(options, function() {});
 		spawn.stdin.pipe(process.stdin);
@@ -31,7 +31,7 @@ function Task(taskArgs) {
 		spawn.stderr.pipe(process.stderr);
 
 		spawn.on("error", function() {
-			grunt.fail.fatal("Spawn: A child process generated error. Exiting.", 1);
+			self.fail();
 		});
 
 		spawn.on("exit", function(code) {
@@ -43,6 +43,10 @@ function Task(taskArgs) {
 		});
 
 		grunt.log.debug("spawn::lib::Task::#execute() <-");
+	};
+
+	self.fail = function(){
+		grunt.fail.fatal("Spawn: A child process generated error. Exiting.", 1);
 	};
 }
 
