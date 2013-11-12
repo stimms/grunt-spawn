@@ -9,8 +9,7 @@ describe("Given TaskConfig()", function() {
 			command:"anyCommand", 
 			commandArgs: ["anyArg"], 
 			pattern: "anyPattern",
-			directory: "anyDirectory",
-			cwd: "aRootedDirectory"
+			directory: "anyDirectory"
 		}
 	});
 
@@ -34,10 +33,6 @@ describe("Given TaskConfig()", function() {
 
 		it("Then should find 'directory'", function() {
 			assert(config.directory == "anyDirectory", "directory == null");
-		});
-
-		it("Then should find 'cwd'", function() {
-			assert(config.cwd == "aRootedDirectory", "cwd == null");
 		});
 
 	});
