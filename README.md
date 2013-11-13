@@ -151,5 +151,6 @@ Here is a brief description of the elements involved:
  - `groupFiles`: true -> Whether to group files into a single string
  - `fileDelimiter`: " " -> The file delimiter if groupFiles = true
  - `ignore`: ["any.js"] -> The files you would like to exclude
+ - `opts`: { cwd: process.cwd() } -> Pass through mechanism for passing 'opts' to grunt.spawn
 
 Ciao! :)

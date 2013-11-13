@@ -71,8 +71,8 @@ function TaskFactory(task) {
 		var tasks = [];
 		var config = self.config.get();
 
-		var files = 
-			(new FileBuilder())
+		var fileBuilder = new FileBuilder();
+		var files = fileBuilder
 				.setDirectory(config.directory)
 				.allFiles();
 
@@ -86,13 +86,13 @@ function TaskFactory(task) {
 		if (config.groupFiles) {
 			var groupedFiles = filteredFiles.join(config.fileDelimiter);
 			var args = self.format(config.commandArgs, groupedFiles);
-			var taskArgs = new TaskArgs(config.command, args);
+			var taskArgs = new TaskArgs(config.command, args, config.opts);
 			var task = new Task(taskArgs);
 			tasks.push(task);
 		} else {
 			_(filteredFiles).each(function(file){
 				var args = self.format(config.commandArgs, file);
-				var taskArgs = new TaskArgs(config.command, args);
+				var taskArgs = new TaskArgs(config.command, args, config.opts);
 				var task = new Task(taskArgs);
 				tasks.push(task);
 			});

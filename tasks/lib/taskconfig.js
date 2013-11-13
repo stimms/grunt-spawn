@@ -3,8 +3,6 @@ require("./include");
 function TaskConfig(task) {
 	'use strict';
 
-	assert(task, "TaskConfig::task = null");
-	
 	var self = this;
 	self.task = task;
 	self._task = _(task);
@@ -12,17 +10,19 @@ function TaskConfig(task) {
 	self.taskIsNotNull = !_.isNull(task);
 	self.taskHasData = self._task.has("data");
 	self.__type__ = "<grunt-spawn/>::tasks::lib::TaskConfig::";
+	assert(task, self.__type__ + "task = null");
 
 	self.propertyDefinitions = {
 		command: { required: true, type: "path", defaultValue: "ls" },
 		commandArgs: { required: false, type: "array", defaultValue: ["{0}"] },
-		directory: { required: false, type: "path", defaultValue: "../../../../" },
+		directory: { required: false, type: "path", defaultValue: process.cwd() },
 		pattern: { required: false, type: "string", defaultValue: "**/*.js" },
 		useQuotes: { required: false, type: "bool", defaultValue: false },
 		quoteDelimiter: { required: false, type: "char", defaultValue: "\"" },
 		groupFiles: { required: false, type: "bool", defaultValue: false },
 		fileDelimiter: { require: false, type: "char", defaultValue: " " },
 		ignore: { require: false, type: "array", defaultValue: [] },
+		opts: { require: false, type: "object", defaultValue: { cwd: process.cwd() } }
 	};
 
 	self.hasData = function(){
