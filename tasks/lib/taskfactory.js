@@ -34,18 +34,18 @@ function TaskFactory(task) {
 	self.quoteWith = function(delimiter, stringArray) {
 		grunt.log.debug(self.__type__ + "quoteWith(delimiter={0}, stringArray={1}) ->".format(delimiter, stringArray));
 		var result = [];
-		_(stringArray).each(function(str){
+		_(stringArray).each(function(str) {
 			result.push(delimiter + str + delimiter);
 		});
 		grunt.log.debug(self.__type__ + "quoteWith(result={0}) <-".format(result));
 		return result;
 	};
 
-	self.shouldIgnore = function(file){
+	self.shouldIgnore = function(file) {
 		grunt.log.debug(self.__type__ + "shouldIgnore(file={0}) ->".format(file));
 		var result = false;
-		_(self.config.get().ignore).each(function(ignoreFile){
-			if(S(file).endsWith(ignoreFile)){
+		_(self.config.get().ignore).each(function(ignoreFile) {
+			if (S(file).endsWith(ignoreFile)) {
 				result = true;
 			}
 		});
@@ -56,7 +56,7 @@ function TaskFactory(task) {
 	self.filterIgnoredFiles = function(files) {
 		grunt.log.debug(self.__type__ + "filterIgnoredFiles(files={0}) ->".format(files));
 		var result = [];
-		_(files).each(function(file){
+		_(files).each(function(file) {
 			if (!self.shouldIgnore(file))
 				result.push(file);
 		});
@@ -64,23 +64,36 @@ function TaskFactory(task) {
 		return result;
 	};
 
-	self.buildTasks = function(){
+	self.filterFiles = function(files) {
+		grunt.log.debug(self.__type__ + "filterFiles(files={0}) <-".format(files));
+		var config = self.config.get();
+		var wildcard = new Wildcard();
+		var result = wildcard.matches(config.pattern, files);
+		result = self.filterIgnoredFiles(result);
+		grunt.log.debug(self.__type__ + "filterFiles(result={0}) <-".format(result));
+		return result;
+	};
+
+	self.getAllFiles = function() {
+		var config = self.config.get();
+		var fileBuilder = new FileBuilder();
+		var files = fileBuilder
+			.setDirectory(config.directory)
+			.allFiles();
+		return files;
+	};
+
+	self.buildTasks = function() {
 
 		grunt.log.debug(self.__type__ + "buildTasks() ->");
 
 		var tasks = [];
 		var config = self.config.get();
 
-		var fileBuilder = new FileBuilder();
-		var files = fileBuilder
-				.setDirectory(config.directory)
-				.allFiles();
+		var files = self.getAllFiles();
+		var filteredFiles = self.filterFiles(files);
 
-		var wildcard = new Wildcard();
-		var filteredFiles = wildcard.matches(config.pattern, files);
-		filteredFiles = self.filterIgnoredFiles(filteredFiles);
-
-		if(config.useQuotes)
+		if (config.useQuotes)
 			filteredFiles = self.quoteWith(config.quoteDelimiter, filteredFiles);
 
 		if (config.groupFiles) {
@@ -90,7 +103,7 @@ function TaskFactory(task) {
 			var task = new Task(taskArgs);
 			tasks.push(task);
 		} else {
-			_(filteredFiles).each(function(file){
+			_(filteredFiles).each(function(file) {
 				var args = self.format(config.commandArgs, file);
 				var taskArgs = new TaskArgs(config.command, args, config.opts);
 				var task = new Task(taskArgs);
