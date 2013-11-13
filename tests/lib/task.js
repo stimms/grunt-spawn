@@ -36,6 +36,10 @@ describe("Given Task('ls', ['-la'])", function() {
 		var args = new TaskArgs("ls", ["-la"], {cwd: "non-existant"});
 		var task = new Task(args);
 
+		task.fail = function(d){
+			if (d) d(1);
+		};
+
 		it("Then exit with an error", function(done) {
 
 			task.execute(function(code) {

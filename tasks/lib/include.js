@@ -1,7 +1,8 @@
 require("string-format");
 
-_ = require("lodash");
+fs = require("fs");
 S = require("string");
+_ = require("lodash");
 util = require("util");
 path = require("path");
 grunt = require("grunt");
