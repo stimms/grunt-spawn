@@ -83,6 +83,14 @@ function TaskFactory(task) {
 		return files;
 	};
 
+	self.createTask = function(fileOrFiles){
+		var config = self.config.get();
+		var args = self.format(config.commandArgs, fileOrFiles);
+		var taskArgs = new TaskArgs(config.command, args, config.opts);
+		var task = new Task(taskArgs);
+		return task;
+	};
+
 	self.buildTasks = function() {
 
 		grunt.log.debug(self.__type__ + "buildTasks() ->");
@@ -98,15 +106,11 @@ function TaskFactory(task) {
 
 		if (config.groupFiles) {
 			var groupedFiles = filteredFiles.join(config.fileDelimiter);
-			var args = self.format(config.commandArgs, groupedFiles);
-			var taskArgs = new TaskArgs(config.command, args, config.opts);
-			var task = new Task(taskArgs);
+			var task = self.createTask(groupedFiles);
 			tasks.push(task);
 		} else {
 			_(filteredFiles).each(function(file) {
-				var args = self.format(config.commandArgs, file);
-				var taskArgs = new TaskArgs(config.command, args, config.opts);
-				var task = new Task(taskArgs);
+				var task = self.createTask(file);
 				tasks.push(task);
 			});
 		}
