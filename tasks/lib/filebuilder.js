@@ -6,15 +6,16 @@ function FileBuilder() {
 	var self = this;
 	self.scanPattern = /.*/;
 	self.rootDirectory = path.normalize(__dirname + "/../../");
+	self.__type__ = "<grunt-spawn/>::tasks::lib::FileBuilder::";
 
 	self.setDirectory = function(directory) {
-		assert(directory, "FileBuilder::setDirectory(directory != null)");
+		assert(directory, self.__type__ + "setDirectory(directory != null)");
 		self.rootDirectory = path.normalize(directory);
 		return this;
 	};
 
 	self.eachDirectory = function(directoryCallback) {
-		assert(directoryCallback, "FileBuilder::eachDirectory(directoryCallback != null)");
+		assert(directoryCallback, self.__type__ + "eachDirectory(directoryCallback != null)");
 		var results = [];
 		fstools.walkSync(
 			self.rootDirectory, 
@@ -29,7 +30,8 @@ function FileBuilder() {
 			.each(function(directory){
 				directoryCallback(directory);
 			});
-	};
+	}
+
 
 	self.allDirectories = function(){
 		var results = [];
@@ -40,7 +42,7 @@ function FileBuilder() {
 	};
 
 	self.eachFile = function(fileCallback) {
-		assert(fileCallback, "FileBuilder::eachFile(fileCallback != null)");
+		assert(fileCallback, self.__type__ + "eachFile(fileCallback != null)");
 		fstools.walkSync(
 			self.rootDirectory, 
 			self.scanPattern, 

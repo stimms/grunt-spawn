@@ -161,5 +161,6 @@ Here is a brief description of the elements involved:
  - `fileDelimiter`: " " -> The file delimiter if groupFiles = true
  - `ignore`: ["any.js"] -> The files you would like to exclude
  - `cwd`: "./prod" -> The directory in which the command should be run
+ - `opts`: { cwd: process.cwd() } -> Pass through mechanism for passing 'opts' to grunt.spawn
 
 Ciao! :)

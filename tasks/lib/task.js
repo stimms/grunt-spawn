@@ -2,48 +2,68 @@ require("./include");
 
 function Task(taskArgs) {
 	'use strict';
-	
+
 	var self = this;
-	self.cmd = taskArgs.cmd;
-	self.args = taskArgs.args;
+	self.taskArgs = taskArgs;
+	self.__type__ = "<grunt-spawn/>::tasks::lib::Task::";
 
-	self.execute = function(done) {
-		grunt.log.debug("spawn::lib::Task::#execute() ->");
+	self.fail = function() {
+		grunt.fail.fatal("<grunt-spawn/>: A child process generated error. Exiting.", 1);
+	};
 
-		var options = {
-			cmd: taskArgs.cmd,
-			args: taskArgs.args,
-			opts: {
-				cwd: taskArgs.cwd
+	self.hasCwd = function(taskArgs) {
+		return taskArgs.opts && taskArgs.opts.cwd;
+	};
+
+	self.cwdExists = function(taskArgs) {
+		return fs.existsSync(taskArgs.opts.cwd);
+	};
+
+	self.checkCwd = function(taskArgs, spawnCommand) {
+		if (self.hasCwd(taskArgs)) {
+			grunt.log.ok("<grunt-spawn/>: Launching '{0}' starting in '{1}' overridden with cwd='{2}'".format(spawnCommand, process.cwd(), taskArgs.opts.cwd));
+			if (!self.cwdExists(taskArgs)) {
+				grunt.log.ok("<grunt-spawn/>: The directory '{0}' could not be found. Is your path relative to '{1}' or absolute?".format(taskArgs.opts.cwd, process.cwd()));
+				self.fail();
 			}
-		};
+		} else {
+			grunt.log.ok("<grunt-spawn/>: Launching '{0}' in current process working directory '{1}'".format(spawnCommand, process.cwd()));
+		}
+	};
 
+	self.formatCmd = function(taskArgs) {
 		var formattedCmd = taskArgs.cmd;
 		var formattedArgs = S(_(taskArgs.args).toString()).replaceAll(",", " ");
 		var spawnCommand = "{0} {1}".format(formattedCmd, formattedArgs);
+		return spawnCommand;
+	};
 
-		grunt.log.subhead("\nSpawn: Launching child process");
-		grunt.log.ok("Spawn: Launching '{0}' in '{1}'".format(spawnCommand, options.opts.cwd));
+	self.execute = function(done) {
+		grunt.log.debug(self.__type__ + "execute(done) ->");
 
-		var spawn = grunt.util.spawn(options, function() {});
+		grunt.log.subhead("\n<grunt-spawn/>: Launching child process");
+		var spawnCommand = self.formatCmd(taskArgs);
+		self.checkCwd(taskArgs, spawnCommand);
+
+		var spawn = grunt.util.spawn(self.taskArgs, function() {});
 		spawn.stdin.pipe(process.stdin);
 		spawn.stdout.pipe(process.stdout);
 		spawn.stderr.pipe(process.stderr);
 
 		spawn.on("error", function() {
+			if (done != null) done(1);
 			self.fail();
 		});
 
 		spawn.on("exit", function(code) {
+			spawn.stdin.unpipe(process.stdin);
+			spawn.stdout.unpipe(process.stdout);
+			spawn.stderr.unpipe(process.stderr);
 			if (done != null) done(code);
-			if (code !== 0) grunt.fail.fatal("Spawn: A child process generated error. Exiting.", 1);
+			if (code !== 0) self.fail(done);
 		});
 
-		grunt.log.debug("spawn::lib::Task::#execute() <-");
-	};
-
-	self.fail = function(){
-		grunt.fail.fatal("Spawn: A child process generated error. Exiting.", 1);
+		grunt.log.debug(self.__type__ + "execute(result=void) <-");
 	};
 }
 
