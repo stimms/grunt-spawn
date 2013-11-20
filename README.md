@@ -96,6 +96,10 @@ You can use the following example to setup your grunt file.
           commandArgs: ["--reporter", "spec", "{0}"],
           directory: "./tests",
           pattern: "**/*.js"
+        },
+        start: {
+          command: "node",
+          cwd: "./prod"
         }
       },
 
@@ -128,7 +132,7 @@ You can use the following example to setup your grunt file.
 
 ### The 'spawn' task
 
-Pay special attention to the spawn task above. There are two targets namely `list` which is merely a demonstration of a bare bones shell command and `test` which demonstrates how this plugin can be tweaked to do slightly more fine grained spawning. Grunt-cli commands below: 
+Pay special attention to the spawn task above. There are three targets namely `list` which is merely a demonstration of a bare bones shell command, `test` which demonstrates how this plugin can be tweaked to do slightly more fine grained spawning. Finally the prod task which demonstrates starting a process in a different directory. Grunt-cli commands below: 
 
     grunt spawn:echo
 
@@ -139,6 +143,10 @@ OR
 OR
 
     grunt spawn:test
+    
+OR
+
+    grunt spawn:prod
 
 Here is a brief description of the elements involved:
 
@@ -151,5 +159,6 @@ Here is a brief description of the elements involved:
  - `groupFiles`: true -> Whether to group files into a single string
  - `fileDelimiter`: " " -> The file delimiter if groupFiles = true
  - `ignore`: ["any.js"] -> The files you would like to exclude
+ - `cwd`: "./prod" -> The directory in which the command should be run
 
 Ciao! :)
