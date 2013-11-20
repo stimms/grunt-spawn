@@ -99,6 +99,7 @@ You can use the following example to setup your grunt file.
         },
         start: {
           command: "node",
+          commandArgs: ["app.js"],
           cwd: "./prod"
         }
       },
